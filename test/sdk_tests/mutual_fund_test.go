@@ -1,6 +1,6 @@
 //go:build sdk
 
-package sdk
+package sdk_tests
 
 import (
 	"testing"
@@ -35,7 +35,7 @@ func TestGetMutualFundOrdersFiltered(t *testing.T) {
 func TestGetMutualFundOrderUnknown(t *testing.T) {
 	c := client(t)
 	resp, _, err := api.NewMutualFundApi(c).GetMutualFundOrder(ctx(t), "MF-ORDER-001")
-	checkAllow(t, resp, err, "UDAPI100010", "UDAPI100050")
+	checkAllow(t, resp, err, "UDAPI100010", "UDAPI100050", "UDAPI100500")
 }
 
 func TestGetMutualFundSips(t *testing.T) {

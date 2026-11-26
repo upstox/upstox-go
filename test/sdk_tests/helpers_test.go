@@ -1,7 +1,7 @@
 //go:build sdk
 
 // Package sdk is a live sanity suite that calls the real Upstox API through the Go SDK.
-package sdk
+package sdk_tests
 
 import (
 	"context"
@@ -41,9 +41,9 @@ var ist = time.FixedZone("IST", 5*3600+1800)
 // client returns a live client, skipping the test when UPSTOX_ACCESS_TOKEN is unset.
 func client(t *testing.T) *upstox_client.APIClient {
 	t.Helper()
-	token := os.Getenv("UPSTOX_ACCESS_TOKEN")
+	token := Token()
 	if token == "" {
-		t.Skip("UPSTOX_ACCESS_TOKEN not set")
+		t.Skip("no access token: set UPSTOX_ACCESS_TOKEN or data_token.AccessToken")
 	}
 	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = token
@@ -53,9 +53,9 @@ func client(t *testing.T) *upstox_client.APIClient {
 // noRedirectClient is client(t) that surfaces 3xx responses instead of following them.
 func noRedirectClient(t *testing.T) *upstox_client.APIClient {
 	t.Helper()
-	token := os.Getenv("UPSTOX_ACCESS_TOKEN")
+	token := Token()
 	if token == "" {
-		t.Skip("UPSTOX_ACCESS_TOKEN not set")
+		t.Skip("no access token: set UPSTOX_ACCESS_TOKEN or data_token.AccessToken")
 	}
 	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = token
@@ -71,9 +71,9 @@ func noRedirectClient(t *testing.T) *upstox_client.APIClient {
 // sandboxClient returns a sandbox client, skipping when UPSTOX_SANDBOX_ACCESS_TOKEN is unset.
 func sandboxClient(t *testing.T) *upstox_client.APIClient {
 	t.Helper()
-	token := os.Getenv("UPSTOX_SANDBOX_ACCESS_TOKEN")
+	token := SandboxToken()
 	if token == "" {
-		t.Skip("UPSTOX_SANDBOX_ACCESS_TOKEN not set")
+		t.Skip("no sandbox token: set UPSTOX_SANDBOX_ACCESS_TOKEN or data_token.SandboxAccessToken")
 	}
 	cfg := upstox_client.NewSandboxConfiguration()
 	cfg.AccessToken = token
@@ -119,6 +119,7 @@ func requireEnv(t *testing.T, names ...string) []string {
 func check(t *testing.T, resp interface{}, err error) {
 	t.Helper()
 	if err != nil {
+		skipIfNotEntitled(t, err)
 		t.Fatalf("API error: %v %s", err, errorBody(err))
 	}
 	if s, ok := status(resp); ok && s != "success" {
@@ -140,6 +141,7 @@ func checkAllow(t *testing.T, resp interface{}, err error, allowed ...string) bo
 				}
 			}
 		}
+		skipIfNotEntitled(t, err)
 		t.Fatalf("API error: %v codes=%v %s", err, codes, errorBody(err))
 	}
 	check(t, resp, nil)
@@ -159,6 +161,24 @@ func checkRejected(t *testing.T, httpResp *http.Response, err error) {
 }
 
 // checkRedirect passes when a raw endpoint answered with a redirect or success.
+// skipIfNotEntitled skips tests for APIs the account's plan does not include.
+func skipIfNotEntitled(t *testing.T, err error) {
+	t.Helper()
+	for _, c := range errorCodes(err) {
+		if c == "UDAPI1149" {
+			t.Skipf("account lacks the required plan (UDAPI1149): %s", errorBody(err))
+		}
+	}
+}
+
+// checkDiscontinued expects a retired endpoint to answer 410 Gone.
+func checkDiscontinued(t *testing.T, httpResp *http.Response, err error) {
+	t.Helper()
+	if httpResp == nil || httpResp.StatusCode != http.StatusGone {
+		t.Fatalf("want 410 Gone for a discontinued endpoint, got %v: %v %s", statusCode(httpResp), err, errorBody(err))
+	}
+}
+
 func checkRedirect(t *testing.T, httpResp *http.Response, err error) {
 	t.Helper()
 	if httpResp == nil {

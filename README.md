@@ -478,12 +478,16 @@ func main() {
 
 ## Testing
 
+Put your access token in [`test/sdk_tests/data_token.go`](test/sdk_tests/data_token.go) (`AccessToken`, `SandboxAccessToken`), as with `data_token.py` in the Python SDK, or set `UPSTOX_ACCESS_TOKEN` / `UPSTOX_SANDBOX_ACCESS_TOKEN`, which take precedence. Never commit a filled-in `data_token.go`.
+
 ```sh
-go test -race ./...                                              # unit tests, no network
-UPSTOX_ACCESS_TOKEN={your_access_token} go test -tags sdk ./test/sdk/ -v   # live sanity tests
+go test -race ./...                              # unit tests, no network
+go test -tags sdk ./test/sdk_tests/ -v           # live API test suite
+go run test/sdk_tests/sanity.go                # sanity script, port of Python's sanity.py
+go run test/sdk_tests/sandbox_sanity.go        # sandbox sanity script
 ```
 
-See [test/sdk/README.md](test/sdk/README.md) for the live suite's options; calls that place or cancel real orders are off unless explicitly enabled.
+See [test/sdk_tests/README.md](test/sdk_tests/README.md) for the options; calls that place or cancel real orders, exit positions or change account settings are off unless explicitly enabled.
 
 ## Development
 

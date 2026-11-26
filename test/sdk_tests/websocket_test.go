@@ -1,6 +1,6 @@
 //go:build sdk
 
-package sdk
+package sdk_tests
 
 import (
 	"strings"
@@ -17,14 +17,11 @@ func checkWSURI(t *testing.T, uri string) {
 	}
 }
 
+// The v2 market data feed is discontinued in favour of v3.
 func TestGetMarketDataFeedAuthorize(t *testing.T) {
 	c := client(t)
-	resp, _, err := api.NewWebsocketApi(c).GetMarketDataFeedAuthorize(ctx(t))
-	check(t, resp, err)
-	if resp.Data == nil {
-		t.Fatal("no authorize data")
-	}
-	checkWSURI(t, resp.Data.AuthorizedRedirectUri)
+	_, httpResp, err := api.NewWebsocketApi(c).GetMarketDataFeedAuthorize(ctx(t))
+	checkDiscontinued(t, httpResp, err)
 }
 
 func TestGetMarketDataFeedAuthorizeV3(t *testing.T) {
@@ -53,7 +50,7 @@ func TestGetPortfolioStreamFeedAuthorize(t *testing.T) {
 func TestGetMarketDataFeed(t *testing.T) {
 	c := noRedirectClient(t)
 	httpResp, err := api.NewWebsocketApi(c).GetMarketDataFeed(ctx(t))
-	checkRedirect(t, httpResp, err)
+	checkDiscontinued(t, httpResp, err)
 }
 
 func TestGetMarketDataFeedV3(t *testing.T) {

@@ -1,6 +1,6 @@
 //go:build sdk
 
-package sdk
+package sdk_tests
 
 import (
 	"math"

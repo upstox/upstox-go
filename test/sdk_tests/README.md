@@ -2,30 +2,68 @@
 
 These tests call the real Upstox API through the Go SDK. Every REST endpoint in `upstox_client/api` is called at least once. The suite is the Go counterpart of the Python SDK's `test/sdk_tests/`.
 
-Every file carries the `sdk` build tag, so `go test ./...` never runs the suite. When `UPSTOX_ACCESS_TOKEN` is unset, every test skips.
+Every test file carries the `sdk` build tag, so `go test ./...` never runs the suite. Tests read their tokens from `data_token.go` (see [Tokens](#tokens)). When no token is set there or in the environment, every test skips.
+
+## Tokens
+
+The tests and both sanity programs read credentials and sample data from `test/sdk_tests/data_token.go`, the counterpart of Python's `data_token.py`:
+
+- `AccessToken`: the live token. `UPSTOX_ACCESS_TOKEN` overrides it.
+- `SandboxAccessToken`: the sandbox token. `UPSTOX_SANDBOX_ACCESS_TOKEN` overrides it.
+- `AlgoNameHeader` and `SampleInstrumentKey`: sample data for order and quote calls.
+
+The environment variables win when they are set. **Never commit a filled-in `data_token.go`.** To stop git from picking up your local edits, run:
+
+```bash
+git update-index --skip-worktree test/sdk_tests/data_token.go
+```
 
 ## Running
 
 ```bash
 # Read-only checks plus safe probes (all market data, account and report endpoints)
-UPSTOX_ACCESS_TOKEN=... go test -tags sdk ./test/sdk/ -v
+UPSTOX_ACCESS_TOKEN=... go test -tags sdk ./test/sdk_tests/ -v
 
 # One service
-UPSTOX_ACCESS_TOKEN=... go test -tags sdk ./test/sdk/ -v -run 'TestGetOptionContracts|TestGetPutCallOptionChain'
+UPSTOX_ACCESS_TOKEN=... go test -tags sdk ./test/sdk_tests/ -v -run 'TestGetOptionContracts|TestGetPutCallOptionChain'
 
 # Also place, modify and cancel real orders
-UPSTOX_ACCESS_TOKEN=... UPSTOX_RUN_ORDER_TESTS=1 go test -tags sdk ./test/sdk/ -v
+UPSTOX_ACCESS_TOKEN=... UPSTOX_RUN_ORDER_TESTS=1 go test -tags sdk ./test/sdk_tests/ -v
 
 # Sandbox order tests only
-UPSTOX_SANDBOX_ACCESS_TOKEN=... go test -tags sdk ./test/sdk/ -v -run TestSandbox
+UPSTOX_SANDBOX_ACCESS_TOKEN=... go test -tags sdk ./test/sdk_tests/ -v -run TestSandbox
 ```
 
-Check that the suite compiles and skips cleanly without credentials:
+Check that the suite compiles and skips cleanly without credentials (this needs an empty `AccessToken` in `data_token.go`):
 
 ```bash
-go vet -tags sdk ./test/sdk/
-env -u UPSTOX_ACCESS_TOKEN go test -tags sdk ./test/sdk/ -v
+go vet -tags sdk ./test/sdk_tests/
+env -u UPSTOX_ACCESS_TOKEN go test -tags sdk ./test/sdk_tests/ -v
 ```
+
+## Sanity scripts
+
+`sanity.go` and `sandbox_sanity.go` are standalone programs next to `data_token.go`, as in Python; a `//go:build ignore` line keeps them out of the test package, and `go run` builds each on its own. They port the Python SDK's `test/sdk_tests/sanity.py` and `sandbox_sanity.py`. Each one makes the same calls in the same order as the Python script, with the same checks:
+
+- A call fails when it returns an error.
+- A call also fails when its `status` is not `success`, or when its `Data` is nil.
+- An expected-error probe fails when the error code is not in Python's list. The code is read from `errors[0].errorCode` or `error_code`.
+
+On a failure, the program prints Python's message. At the end it prints `N checks, M failed` and exits with status 1 if any check failed. With no token, it prints how to set one and exits with status 1.
+
+```bash
+go run test/sdk_tests/sanity.go         # live API, uses AccessToken / UPSTOX_ACCESS_TOKEN
+go run test/sdk_tests/sandbox_sanity.go   # sandbox, uses SandboxAccessToken / UPSTOX_SANDBOX_ACCESS_TOKEN
+```
+
+Like the Python script, `sanity` runs every call with no gates, including the ones that change the account. Read the list before running it against a real account:
+
+- places v2, v3, multi and GTT orders (LIMIT/AMO, small quantities) in the main and the algo-name blocks, and cancels multi orders by tag
+- exits positions by tag and converts a position
+- sets the static IP to `1.2.3.4` and disables the NSE_EQ kill-switch segment
+- logs out at the end, which invalidates the token
+
+IPO apply/cancel and payout initiate/modify/cancel stay off, as in Python (`runDestructiveIpoTests` / `runDestructivePayoutTests` constants, the Go counterparts of `RUN_DESTRUCTIVE_IPO_TESTS` / `RUN_DESTRUCTIVE_PAYOUT_TESTS`). `sandbox_sanity` sends orders to the sandbox only.
 
 ## Environment variables
 

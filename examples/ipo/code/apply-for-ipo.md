@@ -10,15 +10,15 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	ipoApi := api.NewIPOApi(client)
 
 	// Id is the IPO slug id returned by GetIpoListing; Category is IND or HNI; 1 to 3 bids
@@ -32,7 +32,7 @@ func main() {
 	}
 	resp, _, err := ipoApi.ApplyForIpo(context.Background(), body)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling IPOApi.ApplyForIpo:", string(apiErr.Body()))
 		} else {
@@ -61,15 +61,15 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	ipoApi := api.NewIPOApi(client)
 
 	// Build valid bids from the cut-off price and lot size in GetIpoDetails
@@ -85,7 +85,7 @@ func main() {
 	}
 	resp, _, err := ipoApi.ApplyForIpo(context.Background(), body)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling IPOApi.ApplyForIpo:", string(apiErr.Body()))
 		} else {

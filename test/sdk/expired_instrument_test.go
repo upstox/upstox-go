@@ -6,12 +6,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 // pastExpiries returns NIFTY expiries before today, newest first.
-func pastExpiries(t *testing.T, c *upstox.APIClient) []string {
+func pastExpiries(t *testing.T, c *upstox_client.APIClient) []string {
 	t.Helper()
 	resp, _, err := api.NewExpiredInstrumentApi(c).GetExpiriesResponse(ctx(t), niftyKey)
 	check(t, resp, err)

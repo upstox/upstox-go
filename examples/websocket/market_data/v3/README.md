@@ -20,7 +20,7 @@ go get github.com/upstox/upstox-go
 
 ### Protocol Buffers (Protobuf) Classes
 
-The SDK ships the generated Go types for the v3 feed in `github.com/upstox/upstox-go/upstox/feeder/marketdatav3`, so you do not need to run `protoc` yourself.
+The SDK ships the generated Go types for the v3 feed in `github.com/upstox/upstox-go/upstox_client/feeder/marketdatav3`, so you do not need to run `protoc` yourself.
 
 To regenerate them from the [proto file](https://assets.upstox.com/feed/market-data-feed/v3/MarketDataFeed.proto), install the Protocol Buffers compiler from the [Google Protocol Buffers GitHub repository](https://github.com/protocolbuffers/protobuf/releases) and the Go plugin:
 

@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 func TestGetOrderBook(t *testing.T) {
@@ -60,13 +60,13 @@ func TestCancelOrderUnknown(t *testing.T) {
 }
 
 // testOrderParams returns a 1-share BUY LIMIT price 5% under LTP, and whether to send it as AMO.
-func testOrderParams(t *testing.T, c *upstox.APIClient) (float64, bool) {
+func testOrderParams(t *testing.T, c *upstox_client.APIClient) (float64, bool) {
 	t.Helper()
 	return farLimitPrice(ltp(t, c, ideaKey), 0.05), !marketOpen(t, c)
 }
 
 // cancelOnCleanup cancels a placed order when the test ends, whatever the outcome.
-func cancelOnCleanup(t *testing.T, c *upstox.APIClient, orderID string) {
+func cancelOnCleanup(t *testing.T, c *upstox_client.APIClient, orderID string) {
 	t.Cleanup(func() {
 		cctx, cancel := cleanupCtx()
 		defer cancel()

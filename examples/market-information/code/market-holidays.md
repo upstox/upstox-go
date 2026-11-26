@@ -11,18 +11,18 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
-	client := upstox.NewAPIClient(cfg)
+	cfg := upstox_client.NewConfiguration()
+	client := upstox_client.NewAPIClient(cfg)
 	marketHolidaysAndTimingsApi := api.NewMarketHolidaysAndTimingsApi(client)
 
 	resp, _, err := marketHolidaysAndTimingsApi.GetHolidays(context.Background())
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MarketHolidaysAndTimingsApi.GetHolidays:", string(apiErr.Body()))
 		} else {
@@ -48,18 +48,18 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
-	client := upstox.NewAPIClient(cfg)
+	cfg := upstox_client.NewConfiguration()
+	client := upstox_client.NewAPIClient(cfg)
 	marketHolidaysAndTimingsApi := api.NewMarketHolidaysAndTimingsApi(client)
 
 	resp, _, err := marketHolidaysAndTimingsApi.GetHoliday(context.Background(), "2024-01-22")
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MarketHolidaysAndTimingsApi.GetHoliday:", string(apiErr.Body()))
 		} else {

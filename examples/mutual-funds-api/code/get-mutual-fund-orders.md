@@ -11,19 +11,19 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	mutualFundApi := api.NewMutualFundApi(client)
 
 	resp, _, err := mutualFundApi.GetMutualFundOrders(context.Background(), nil)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MutualFundApi.GetMutualFundOrders:", string(apiErr.Body()))
 		} else {
@@ -50,19 +50,19 @@ import (
 	"fmt"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	mutualFundApi := api.NewMutualFundApi(client)
 
 	resp, _, err := mutualFundApi.GetMutualFundOrders(context.Background(), &api.MutualFundApiGetMutualFundOrdersOpts{Status: optional.NewString("complete"), TransactionType: optional.NewString("BUY")})
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MutualFundApi.GetMutualFundOrders:", string(apiErr.Body()))
 		} else {
@@ -89,19 +89,19 @@ import (
 	"fmt"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	mutualFundApi := api.NewMutualFundApi(client)
 
 	resp, _, err := mutualFundApi.GetMutualFundOrders(context.Background(), &api.MutualFundApiGetMutualFundOrdersOpts{PageNumber: optional.NewInt32(1), Records: optional.NewInt32(10)})
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MutualFundApi.GetMutualFundOrders:", string(apiErr.Body()))
 		} else {

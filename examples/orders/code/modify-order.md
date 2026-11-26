@@ -11,15 +11,15 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	orderApi := api.NewOrderApi(client)
 
 	body := models.ModifyOrderRequest{
@@ -33,7 +33,7 @@ func main() {
 	}
 	resp, _, err := orderApi.ModifyOrder(context.Background(), body, nil)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling OrderApi.ModifyOrder:", string(apiErr.Body()))
 		} else {

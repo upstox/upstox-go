@@ -11,19 +11,19 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	ipoApi := api.NewIPOApi(client)
 
 	resp, _, err := ipoApi.GetIpoOrders(context.Background(), nil)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling IPOApi.GetIpoOrders:", string(apiErr.Body()))
 		} else {
@@ -50,19 +50,19 @@ import (
 	"fmt"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	ipoApi := api.NewIPOApi(client)
 
 	resp, _, err := ipoApi.GetIpoOrders(context.Background(), &api.IPOApiGetIpoOrdersOpts{PageNumber: optional.NewString("1"), Records: optional.NewString("20")})
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling IPOApi.GetIpoOrders:", string(apiErr.Body()))
 		} else {
@@ -91,19 +91,19 @@ import (
 	"fmt"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	ipoApi := api.NewIPOApi(client)
 
 	resp, _, err := ipoApi.GetIpoOrders(context.Background(), &api.IPOApiGetIpoOrdersOpts{PageNumber: optional.NewString("1"), Records: optional.NewString("50")})
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling IPOApi.GetIpoOrders:", string(apiErr.Body()))
 		} else {

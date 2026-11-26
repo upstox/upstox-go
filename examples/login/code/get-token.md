@@ -11,13 +11,13 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
-	client := upstox.NewAPIClient(cfg)
+	cfg := upstox_client.NewConfiguration()
+	client := upstox_client.NewAPIClient(cfg)
 	loginApi := api.NewLoginApi(client)
 
 	code := "{your_auth_code}"
@@ -27,7 +27,7 @@ func main() {
 	grantType := "authorization_code"
 	resp, _, err := loginApi.Token(context.Background(), code, clientId, clientSecret, redirectUri, grantType, false)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling LoginApi.Token:", string(apiErr.Body()))
 		} else {

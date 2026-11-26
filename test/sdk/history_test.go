@@ -5,7 +5,7 @@ package sdk
 import (
 	"testing"
 
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func TestGetHistoricalCandleData(t *testing.T) {

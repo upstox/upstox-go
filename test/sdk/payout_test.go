@@ -6,8 +6,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 const missingPayoutID = "sdk-go-no-such-transaction"

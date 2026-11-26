@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 func TestGetIpoListing(t *testing.T) {

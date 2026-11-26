@@ -23,7 +23,7 @@ For full setup, sandbox mode, and auth flow, see the main [Upstox Go SDK README]
 
 Samples are grouped by API area. Each `.md` file contains one or more complete `package main` Go programs you can run after replacing placeholders like `{your_access_token}` and `{your_client_id}`.
 
-Every program follows the same pattern: build a client with `upstox.NewAPIClient(cfg)`, bind a service with `api.New<Service>Api(client)`, pass request bodies from the `models` package, and unwrap API errors with `errors.As` into an `upstox.GenericSwaggerError`.
+Every program follows the same pattern: build a client with `upstox_client.NewAPIClient(cfg)`, bind a service with `api.New<Service>Api(client)`, pass request bodies from the `models` package, and unwrap API errors with `errors.As` into an `upstox_client.GenericSwaggerError`.
 
 | Folder | Description |
 |--------|-------------|

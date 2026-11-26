@@ -11,19 +11,19 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	orderApi := api.NewOrderApi(client)
 
 	resp, _, err := orderApi.ExitPositions(context.Background(), nil)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling OrderApi.ExitPositions:", string(apiErr.Body()))
 		} else {
@@ -54,19 +54,19 @@ import (
 	"fmt"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	orderApi := api.NewOrderApi(client)
 
 	resp, _, err := orderApi.ExitPositions(context.Background(), &api.OrderApiExitPositionsOpts{Segment: optional.NewString("NSE_FO")})
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling OrderApi.ExitPositions:", string(apiErr.Body()))
 		} else {
@@ -97,19 +97,19 @@ import (
 	"fmt"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	orderApi := api.NewOrderApi(client)
 
 	resp, _, err := orderApi.ExitPositions(context.Background(), &api.OrderApiExitPositionsOpts{Tag: optional.NewString("xyz")})
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling OrderApi.ExitPositions:", string(apiErr.Body()))
 		} else {

@@ -1,6 +1,6 @@
 # Live SDK sanity suite
 
-These tests call the real Upstox API through the Go SDK. Every REST endpoint in `upstox/api` is called at least once. The suite is the Go counterpart of the Python SDK's `test/sdk_tests/`.
+These tests call the real Upstox API through the Go SDK. Every REST endpoint in `upstox_client/api` is called at least once. The suite is the Go counterpart of the Python SDK's `test/sdk_tests/`.
 
 Every file carries the `sdk` build tag, so `go test ./...` never runs the suite. When `UPSTOX_ACCESS_TOKEN` is unset, every test skips.
 

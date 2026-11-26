@@ -8,14 +8,14 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/feeder"
-	"github.com/upstox/upstox-go/upstox/feeder/marketdatav3"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/feeder"
+	"github.com/upstox/upstox-go/upstox_client/feeder/marketdatav3"
 	"google.golang.org/protobuf/encoding/protojson"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "ACCESS_TOKEN"
 
 	streamer, err := feeder.NewMarketDataStreamerV3(cfg,

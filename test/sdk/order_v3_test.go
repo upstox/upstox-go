@@ -7,9 +7,9 @@ import (
 	"testing"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 func TestModifyOrderV3Unknown(t *testing.T) {
@@ -90,7 +90,7 @@ func TestCancelGTTOrderUnknown(t *testing.T) {
 }
 
 // placeGTT places a GTT and registers its cancellation, returning the GTT order ID.
-func placeGTT(t *testing.T, c *upstox.APIClient, body models.GttPlaceOrderRequest) string {
+func placeGTT(t *testing.T, c *upstox_client.APIClient, body models.GttPlaceOrderRequest) string {
 	t.Helper()
 	o := api.NewOrderV3Api(c)
 	resp, _, err := o.PlaceGTTOrder(ctx(t), body, &api.OrderV3ApiPlaceGTTOrderOpts{XAlgoName: algoName()})

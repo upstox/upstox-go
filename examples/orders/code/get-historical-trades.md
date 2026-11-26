@@ -12,19 +12,19 @@ import (
 	"fmt"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	postTradeApi := api.NewPostTradeApi(client)
 
 	resp, _, err := postTradeApi.GetTradesByDateRange(context.Background(), "2023-04-01", "2025-03-31", 1, 1000, &api.PostTradeApiGetTradesByDateRangeOpts{Segment: optional.NewString("EQ")})
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling PostTradeApi.GetTradesByDateRange:", string(apiErr.Body()))
 		} else {
@@ -51,19 +51,19 @@ import (
 	"fmt"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	postTradeApi := api.NewPostTradeApi(client)
 
 	resp, _, err := postTradeApi.GetTradesByDateRange(context.Background(), "2023-04-01", "2025-03-31", 1, 1000, &api.PostTradeApiGetTradesByDateRangeOpts{Segment: optional.NewString("FO")})
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling PostTradeApi.GetTradesByDateRange:", string(apiErr.Body()))
 		} else {

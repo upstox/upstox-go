@@ -17,9 +17,9 @@ import (
 	"time"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 const (
@@ -39,25 +39,25 @@ const (
 var ist = time.FixedZone("IST", 5*3600+1800)
 
 // client returns a live client, skipping the test when UPSTOX_ACCESS_TOKEN is unset.
-func client(t *testing.T) *upstox.APIClient {
+func client(t *testing.T) *upstox_client.APIClient {
 	t.Helper()
 	token := os.Getenv("UPSTOX_ACCESS_TOKEN")
 	if token == "" {
 		t.Skip("UPSTOX_ACCESS_TOKEN not set")
 	}
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = token
-	return upstox.NewAPIClient(cfg)
+	return upstox_client.NewAPIClient(cfg)
 }
 
 // noRedirectClient is client(t) that surfaces 3xx responses instead of following them.
-func noRedirectClient(t *testing.T) *upstox.APIClient {
+func noRedirectClient(t *testing.T) *upstox_client.APIClient {
 	t.Helper()
 	token := os.Getenv("UPSTOX_ACCESS_TOKEN")
 	if token == "" {
 		t.Skip("UPSTOX_ACCESS_TOKEN not set")
 	}
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = token
 	cfg.HTTPClient = &http.Client{
 		Timeout: 30 * time.Second,
@@ -65,19 +65,19 @@ func noRedirectClient(t *testing.T) *upstox.APIClient {
 			return http.ErrUseLastResponse
 		},
 	}
-	return upstox.NewAPIClient(cfg)
+	return upstox_client.NewAPIClient(cfg)
 }
 
 // sandboxClient returns a sandbox client, skipping when UPSTOX_SANDBOX_ACCESS_TOKEN is unset.
-func sandboxClient(t *testing.T) *upstox.APIClient {
+func sandboxClient(t *testing.T) *upstox_client.APIClient {
 	t.Helper()
 	token := os.Getenv("UPSTOX_SANDBOX_ACCESS_TOKEN")
 	if token == "" {
 		t.Skip("UPSTOX_SANDBOX_ACCESS_TOKEN not set")
 	}
-	cfg := upstox.NewSandboxConfiguration()
+	cfg := upstox_client.NewSandboxConfiguration()
 	cfg.AccessToken = token
-	return upstox.NewAPIClient(cfg)
+	return upstox_client.NewAPIClient(cfg)
 }
 
 // ctx returns a per-test context with a 30s timeout.
@@ -206,7 +206,7 @@ func status(resp interface{}) (string, bool) {
 
 // errorBody returns the raw body of a GenericSwaggerError, or "".
 func errorBody(err error) string {
-	var apiErr upstox.GenericSwaggerError
+	var apiErr upstox_client.GenericSwaggerError
 	if errors.As(err, &apiErr) {
 		return string(apiErr.Body())
 	}
@@ -215,7 +215,7 @@ func errorBody(err error) string {
 
 // errorCodes extracts error codes from an Upstox error body; it accepts both errorCode and error_code.
 func errorCodes(err error) []string {
-	var apiErr upstox.GenericSwaggerError
+	var apiErr upstox_client.GenericSwaggerError
 	if !errors.As(err, &apiErr) {
 		return nil
 	}
@@ -270,7 +270,7 @@ func previousFinancialYear() string {
 }
 
 // ltp fetches the last traded price for an instrument key.
-func ltp(t *testing.T, c *upstox.APIClient, key string) float64 {
+func ltp(t *testing.T, c *upstox_client.APIClient, key string) float64 {
 	t.Helper()
 	resp, _, err := api.NewMarketQuoteV3Api(c).GetLtp(ctx(t), &api.MarketQuoteV3ApiGetLtpOpts{InstrumentKey: optional.NewString(key)})
 	check(t, resp, err)
@@ -294,7 +294,7 @@ func farLimitPrice(ltp, frac float64) float64 {
 }
 
 // marketOpen reports whether NSE is in its normal trading session; AMO is used otherwise.
-func marketOpen(t *testing.T, c *upstox.APIClient) bool {
+func marketOpen(t *testing.T, c *upstox_client.APIClient) bool {
 	t.Helper()
 	resp, _, err := api.NewMarketHolidaysAndTimingsApi(c).GetMarketStatus(ctx(t), "NSE")
 	check(t, resp, err)
@@ -302,7 +302,7 @@ func marketOpen(t *testing.T, c *upstox.APIClient) bool {
 }
 
 // niftyOption finds the at-the-money NIFTY call for the current month via instrument search.
-func niftyOption(t *testing.T, c *upstox.APIClient) models.InstrumentData {
+func niftyOption(t *testing.T, c *upstox_client.APIClient) models.InstrumentData {
 	t.Helper()
 	resp, _, err := api.NewInstrumentsApi(c).SearchInstrument(ctx(t), "Nifty 50", &api.InstrumentsApiSearchInstrumentOpts{
 		Exchanges:       optional.NewString("NSE"),
@@ -323,7 +323,7 @@ func niftyOption(t *testing.T, c *upstox.APIClient) models.InstrumentData {
 }
 
 // niftyExpiry returns the yyyy-MM-dd expiry of the current-month NIFTY option.
-func niftyExpiry(t *testing.T, c *upstox.APIClient) string {
+func niftyExpiry(t *testing.T, c *upstox_client.APIClient) string {
 	t.Helper()
 	e := niftyOption(t, c).Expiry
 	if len(e) > 10 {

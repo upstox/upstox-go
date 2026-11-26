@@ -7,12 +7,12 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/feeder"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/feeder"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "ACCESS_TOKEN"
 
 	streamer, err := feeder.NewPortfolioDataStreamer(cfg, feeder.PortfolioUpdates{Order: true})

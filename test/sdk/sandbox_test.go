@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 // Sandbox orders are simulated, so these run with just UPSTOX_SANDBOX_ACCESS_TOKEN.

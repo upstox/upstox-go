@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func checkWSURI(t *testing.T, uri string) {

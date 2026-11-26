@@ -5,7 +5,7 @@ The `feeder` package connects to the Upstox WebSocket feeds for live market data
 1. **MarketDataStreamerV3**: real-time market updates for the instruments you subscribe to, decoded from protobuf.
 2. **PortfolioDataStreamer**: real-time order, position, holding and GTT order updates as JSON.
 
-Both streamers authenticate with the access token on your `upstox.Configuration`, reconnect automatically after an abnormal disconnect, and replay your market data subscriptions after every reconnect.
+Both streamers authenticate with the access token on your `upstox_client.Configuration`, reconnect automatically after an abnormal disconnect, and replay your market data subscriptions after every reconnect.
 
 ```sh
 go get github.com/upstox/upstox-go
@@ -27,13 +27,13 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/feeder"
-	"github.com/upstox/upstox-go/upstox/feeder/marketdatav3"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/feeder"
+	"github.com/upstox/upstox-go/upstox_client/feeder/marketdatav3"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
 
 	streamer, err := feeder.NewMarketDataStreamerV3(cfg,
@@ -96,13 +96,13 @@ import (
 	"log"
 	"time"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/feeder"
-	"github.com/upstox/upstox-go/upstox/feeder/marketdatav3"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/feeder"
+	"github.com/upstox/upstox-go/upstox_client/feeder/marketdatav3"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
 
 	streamer, err := feeder.NewMarketDataStreamerV3(cfg, nil, feeder.ModeFull)
@@ -149,12 +149,12 @@ import (
 	"log"
 	"time"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/feeder"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/feeder"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
 
 	streamer, err := feeder.NewMarketDataStreamerV3(cfg, []string{"NSE_INDEX|Nifty 50"}, feeder.ModeLTPC)
@@ -186,12 +186,12 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/feeder"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/feeder"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
 
 	streamer, err := feeder.NewPortfolioDataStreamer(cfg, feeder.PortfolioUpdates{

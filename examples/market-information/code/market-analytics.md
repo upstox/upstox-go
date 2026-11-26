@@ -11,19 +11,19 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	marketHolidaysAndTimingsApi := api.NewMarketHolidaysAndTimingsApi(client)
 
 	resp, _, err := marketHolidaysAndTimingsApi.GetOiData(context.Background(), "NSE_INDEX|Nifty 50", "2026-05-29", "2026-05-12")
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MarketHolidaysAndTimingsApi.GetOiData:", string(apiErr.Body()))
 		} else {
@@ -53,19 +53,19 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	marketHolidaysAndTimingsApi := api.NewMarketHolidaysAndTimingsApi(client)
 
 	resp, _, err := marketHolidaysAndTimingsApi.GetChangeOiData(context.Background(), "NSE_INDEX|Nifty 50", "2026-05-29", "2026-05-12", 5)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MarketHolidaysAndTimingsApi.GetChangeOiData:", string(apiErr.Body()))
 		} else {
@@ -95,19 +95,19 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	marketHolidaysAndTimingsApi := api.NewMarketHolidaysAndTimingsApi(client)
 
 	resp, _, err := marketHolidaysAndTimingsApi.GetPcrData(context.Background(), "NSE_INDEX|Nifty 50", "2026-05-29", "2026-05-12", 30)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MarketHolidaysAndTimingsApi.GetPcrData:", string(apiErr.Body()))
 		} else {
@@ -137,19 +137,19 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	marketHolidaysAndTimingsApi := api.NewMarketHolidaysAndTimingsApi(client)
 
 	resp, _, err := marketHolidaysAndTimingsApi.GetMaxPainData(context.Background(), "NSE_INDEX|Nifty 50", "2026-05-29", "2026-05-12", 30)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MarketHolidaysAndTimingsApi.GetMaxPainData:", string(apiErr.Body()))
 		} else {
@@ -179,19 +179,19 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	marketHolidaysAndTimingsApi := api.NewMarketHolidaysAndTimingsApi(client)
 
 	resp, _, err := marketHolidaysAndTimingsApi.GetFiiData(context.Background(), "NSE_EQ|CASH", "1D", nil)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MarketHolidaysAndTimingsApi.GetFiiData:", string(apiErr.Body()))
 		} else {
@@ -222,19 +222,19 @@ import (
 	"fmt"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	marketHolidaysAndTimingsApi := api.NewMarketHolidaysAndTimingsApi(client)
 
 	resp, _, err := marketHolidaysAndTimingsApi.GetFiiData(context.Background(), "NSE_FO|INDEX_FUTURES", "1M", &api.MarketHolidaysAndTimingsApiGetFiiDataOpts{From: optional.NewString("2026-01-01")})
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MarketHolidaysAndTimingsApi.GetFiiData:", string(apiErr.Body()))
 		} else {
@@ -264,19 +264,19 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	marketHolidaysAndTimingsApi := api.NewMarketHolidaysAndTimingsApi(client)
 
 	resp, _, err := marketHolidaysAndTimingsApi.GetDiiData(context.Background(), "NSE_EQ|CASH", "1D", nil)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Exception when calling MarketHolidaysAndTimingsApi.GetDiiData:", string(apiErr.Body()))
 		} else {

@@ -1,6 +1,6 @@
 # Upstox Go SDK for API v2
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/upstox/upstox-go.svg)](https://pkg.go.dev/github.com/upstox/upstox-go/upstox)
+[![Go Reference](https://pkg.go.dev/badge/github.com/upstox/upstox-go.svg)](https://pkg.go.dev/github.com/upstox/upstox-go/upstox_client)
 
 ## Introduction
 
@@ -32,16 +32,16 @@ Then import the packages. The layout mirrors the other Upstox SDKs:
 
 | Package | Contents |
 |---|---|
-| `github.com/upstox/upstox-go/upstox` | `Configuration`, `APIClient`, errors, sandbox mode |
-| `github.com/upstox/upstox-go/upstox/api` | one service per API group (`OrderApi`, `UserApi`, `MarketQuoteV3Api`, ...) |
-| `github.com/upstox/upstox-go/upstox/models` | request and response types |
-| `github.com/upstox/upstox-go/upstox/feeder` | WebSocket streamers (`MarketDataStreamerV3`, `PortfolioDataStreamer`) |
+| `github.com/upstox/upstox-go/upstox_client` | `Configuration`, `APIClient`, errors, sandbox mode |
+| `github.com/upstox/upstox-go/upstox_client/api` | one service per API group (`OrderApi`, `UserApi`, `MarketQuoteV3Api`, ...) |
+| `github.com/upstox/upstox-go/upstox_client/models` | request and response types |
+| `github.com/upstox/upstox-go/upstox_client/feeder` | WebSocket streamers (`MarketDataStreamerV3`, `PortfolioDataStreamer`) |
 
 ```go
 import (
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 ```
 
@@ -55,19 +55,19 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 
 	userApi := api.NewUserApi(client)
 	resp, _, err := userApi.GetProfile(context.Background())
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Error:", string(apiErr.Body()))
 			return
@@ -84,13 +84,13 @@ func main() {
 Create a service from the client with `api.New<Service>Api(client)` (like Python's `upstox_client.OrderApi(api_client)`). Every call has the same shape: `<service>.<Method>(ctx, <required params>, opts)`, returning the decoded response, the raw `*http.Response` and an error.
 Optional parameters go in a `*api.<Service>Api<Method>Opts` struct built with [`github.com/antihax/optional`](https://pkg.go.dev/github.com/antihax/optional), e.g. `&api.OrderV3ApiPlaceOrderV3Opts{XAlgoName: optional.NewString("my-algo")}`; pass `nil` when there are none.
 Models in `models` are plain structs with exported fields; `Data` is often a pointer, so nil-check it.
-API errors are `upstox.GenericSwaggerError`; `Body()` holds the Upstox error code and message.
+API errors are `upstox_client.GenericSwaggerError`; `Body()` holds the Upstox error code and message.
 
 Order place, modify and cancel calls are sent to `api-hft.upstox.com`; everything else, including US stock orders, goes to `api.upstox.com`.
 
 ## Sandbox Mode
 
-We recommend using the sandbox environment for testing purposes. To enable sandbox mode, create the configuration with `upstox.NewSandboxConfiguration()`.
+We recommend using the sandbox environment for testing purposes. To enable sandbox mode, create the configuration with `upstox_client.NewSandboxConfiguration()`.
 
 ```go
 package main
@@ -100,15 +100,15 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 func main() {
-	cfg := upstox.NewSandboxConfiguration()
+	cfg := upstox_client.NewSandboxConfiguration()
 	cfg.AccessToken = "{your_sandbox_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 
 	order := models.PlaceOrderV3Request{
 		Quantity:          1,
@@ -126,7 +126,7 @@ func main() {
 	}
 	resp, _, err := api.NewOrderV3Api(client).PlaceOrderV3(context.Background(), order, nil)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Error:", string(apiErr.Body()))
 			return
@@ -156,15 +156,15 @@ import (
 	"fmt"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 
 	order := models.PlaceOrderV3Request{
 		Quantity:          1,
@@ -182,7 +182,7 @@ func main() {
 	opts := &api.OrderV3ApiPlaceOrderV3Opts{XAlgoName: optional.NewString("your-algo-name")}
 	resp, _, err := api.NewOrderV3Api(client).PlaceOrderV3(context.Background(), order, opts)
 	if err != nil {
-		var apiErr upstox.GenericSwaggerError
+		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
 			fmt.Println("Error:", string(apiErr.Body()))
 			return
@@ -256,7 +256,7 @@ Connecting to the WebSocket for market and portfolio updates is streamlined thro
 1. **MarketDataStreamerV3**: Offers real-time market updates, providing a seamless way to receive instantaneous information on various market instruments.
 2. **PortfolioDataStreamer**: Delivers updates related to the user's orders, enhancing the ability to track order status and portfolio changes effectively.
 
-Both live in the `github.com/upstox/upstox-go/upstox/feeder` package and authenticate with the configuration's `AccessToken`.
+Both live in the `github.com/upstox/upstox-go/upstox_client/feeder` package and authenticate with the configuration's `AccessToken`.
 
 ## Detailed Explanation of Feeder Interface
 
@@ -272,13 +272,13 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/feeder"
-	"github.com/upstox/upstox-go/upstox/feeder/marketdatav3"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/feeder"
+	"github.com/upstox/upstox-go/upstox_client/feeder/marketdatav3"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
 
 	streamer, err := feeder.NewMarketDataStreamerV3(cfg, []string{"NSE_INDEX|Nifty 50", "NSE_INDEX|Nifty Bank"}, feeder.ModeFull)
@@ -339,13 +339,13 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/feeder"
-	"github.com/upstox/upstox-go/upstox/feeder/marketdatav3"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/feeder"
+	"github.com/upstox/upstox-go/upstox_client/feeder/marketdatav3"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
 
 	streamer, err := feeder.NewMarketDataStreamerV3(cfg, []string{"NSE_INDEX|Nifty 50"}, feeder.ModeFull)
@@ -384,12 +384,12 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/feeder"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/feeder"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
 
 	streamer, err := feeder.NewMarketDataStreamerV3(cfg, []string{"NSE_INDEX|Nifty 50"}, feeder.ModeLTPC)
@@ -425,12 +425,12 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/feeder"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/feeder"
 )
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
 
 	streamer, err := feeder.NewPortfolioDataStreamer(cfg, feeder.PortfolioUpdates{
@@ -487,14 +487,14 @@ See [test/sdk/README.md](test/sdk/README.md) for the live suite's options; calls
 
 ## Development
 
-The REST client — `upstox/client.go`, `configuration.go`, `response.go`, `upstox/api/` and `upstox/models/` — plus `docs/` and the spec copy `api/swagger.yaml` are generated from the Upstox OpenAPI spec with swagger-codegen 3.0.79 (`-l go`), like the other Upstox SDKs. Do not edit them by hand; they are regenerated by the SDK sync process, which adapts the spec, runs swagger-codegen, re-applies the Upstox hooks (access token, HFT routing, sandbox, SDK headers) and splits the output into the `api` and `models` packages.
+The REST client — `upstox_client/client.go`, `configuration.go`, `response.go`, `upstox_client/api/` and `upstox_client/models/` — plus `docs/` and the spec copy `api/swagger.yaml` are generated from the Upstox OpenAPI spec with swagger-codegen 3.0.79 (`-l go`), like the other Upstox SDKs. Do not edit them by hand; they are regenerated by the SDK sync process, which adapts the spec, runs swagger-codegen, re-applies the Upstox hooks (access token, HFT routing, sandbox, SDK headers) and splits the output into the `api` and `models` packages.
 
-Hand-written code lives in `upstox/upstox.go`, `upstox/upstox_test.go` and `upstox/feeder/`.
+Hand-written code lives in `upstox_client/upstox.go`, `upstox_client/upstox_test.go` and `upstox_client/feeder/`.
 
 To regenerate the market data protobuf types:
 
 ```sh
-cd upstox/feeder/marketdatav3
+cd upstox_client/feeder/marketdatav3
 protoc --go_out=. --go_opt=paths=source_relative MarketDataFeedV3.proto
 ```
 

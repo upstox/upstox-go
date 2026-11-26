@@ -9,18 +9,18 @@ import (
 	"os"
 
 	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox"
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 // underlying is the index whose options are traded; e.g. "Nifty Bank" or "SENSEX".
 const underlying = "Nifty 50"
 
 func main() {
-	cfg := upstox.NewConfiguration()
+	cfg := upstox_client.NewConfiguration()
 	cfg.AccessToken = "{your_access_token}"
-	client := upstox.NewAPIClient(cfg)
+	client := upstox_client.NewAPIClient(cfg)
 	instrumentsApi := api.NewInstrumentsApi(client)
 	orderApi := api.NewOrderV3Api(client)
 	ctx := context.Background()
@@ -88,7 +88,7 @@ func placeOrder(ctx context.Context, orderApi *api.OrderV3ApiService, leg models
 
 // exitOnError prints the API error body when available and stops, so no further legs are placed.
 func exitOnError(err error) {
-	var apiErr upstox.GenericSwaggerError
+	var apiErr upstox_client.GenericSwaggerError
 	if errors.As(err, &apiErr) {
 		fmt.Printf("API error: %v: %s\n", err, apiErr.Body())
 	} else {

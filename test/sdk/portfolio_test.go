@@ -5,8 +5,8 @@ package sdk
 import (
 	"testing"
 
-	"github.com/upstox/upstox-go/upstox/api"
-	"github.com/upstox/upstox-go/upstox/models"
+	"github.com/upstox/upstox-go/upstox_client/api"
+	"github.com/upstox/upstox-go/upstox_client/models"
 )
 
 func TestGetHoldings(t *testing.T) {

@@ -26,9 +26,21 @@ profile.cov
 go.work
 go.work.sum
 
-# env file
+# Build output
+/bin/
+/dist/
+
+# Access tokens and local config; never commit these
 .env
+.env.*
+*.token
 
 # Editor/IDE
-# .idea/
-# .vscode/
+.idea/
+.vscode/
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

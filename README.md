@@ -1,4 +1,4 @@
-# Upstox Go SDK for API v2
+# Upstox Go SDK
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/upstox/upstox-go.svg)](https://pkg.go.dev/github.com/upstox/upstox-go/upstox_client)
 
@@ -8,7 +8,6 @@ The official Go client for communicating with the <a href="https://upstox.com/tr
 
 Upstox API is a set of rest APIs that provide data required to build a complete investment and trading platform. Execute orders in real time, manage user portfolio, stream live market data (using Websocket), and more, with the easy to understand API collection.
 
-- API version: v2
 - Package version: 1.0.0
 - Build package: io.swagger.codegen.v3.generators.go.GoClientCodegen
 
@@ -142,61 +141,6 @@ func main() {
 
 Calls the sandbox does not support return an error without being sent.
 To learn more about the sandbox environment and the available sandbox APIs, please visit the [Upstox API documentation - Sandbox](https://upstox.com/developer/api-documentation/sandbox).
-
-## Algo Name Support
-
-The SDK supports passing an algorithm name for order tracking and management. When provided, the SDK sends it as the `X-Algo-Name` header.
-
-```go
-package main
-
-import (
-	"context"
-	"errors"
-	"fmt"
-
-	"github.com/antihax/optional"
-	"github.com/upstox/upstox-go/upstox_client"
-	"github.com/upstox/upstox-go/upstox_client/api"
-	"github.com/upstox/upstox-go/upstox_client/models"
-)
-
-func main() {
-	cfg := upstox_client.NewConfiguration()
-	cfg.AccessToken = "{your_access_token}"
-	client := upstox_client.NewAPIClient(cfg)
-
-	order := models.PlaceOrderV3Request{
-		Quantity:          1,
-		Product:           "D",
-		Validity:          "DAY",
-		Price:             20,
-		InstrumentToken:   "NSE_EQ|INE528G01035",
-		OrderType:         "LIMIT",
-		TransactionType:   "BUY",
-		DisclosedQuantity: 0,
-		TriggerPrice:      0,
-		IsAmo:             false,
-		Slice:             true,
-	}
-	opts := &api.OrderV3ApiPlaceOrderOpts{XAlgoName: optional.NewString("your-algo-name")}
-	resp, _, err := api.NewOrderV3Api(client).PlaceOrder(context.Background(), order, opts)
-	if err != nil {
-		var apiErr upstox_client.GenericSwaggerError
-		if errors.As(err, &apiErr) {
-			fmt.Println("Error:", string(apiErr.Body()))
-			return
-		}
-		fmt.Println("Error:", err)
-		return
-	}
-	if resp.Data != nil {
-		fmt.Println(resp.Data.OrderIds)
-	}
-}
-```
-
-Other order methods (modify, cancel, multi-order, exit positions and GTT) accept `XAlgoName` in their `Opts` struct the same way.
 
 ## Market Protection
 

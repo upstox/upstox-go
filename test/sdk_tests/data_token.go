@@ -5,8 +5,8 @@ package sdk_tests
 import "os"
 
 var (
-	AccessToken        = ""
-	SandboxAccessToken = ""
+	AccessToken        = "eyJ0eXAiOiJKV1QiLCJrZXlfaWQiOiJza192MS4wIiwiYWxnIjoiSFMyNTYifQ.eyJzdWIiOiI4NTg2NDQiLCJqdGkiOiI2YjA5NzZlYTg1MDIwNjE0NmQyYWM2YTgiLCJpc011bHRpQ2xpZW50IjpmYWxzZSwiaXNQbHVzUGxhbiI6ZmFsc2UsImlhdCI6MTc5NTc4MjM3OCwiaXNzIjoidWRhcGktZ2F0ZXdheS1zZXJ2aWNlIiwiZXhwIjoxNzk1ODE2ODAwfQ.ym96FNiNcZJEx7X-_gTwF0912qqVtcGa3LO3HlrxDlY"
+	SandboxAccessToken = "eyJ0eXAiOiJKV1QiLCJrZXlfaWQiOiJza192MS4wIiwiYWxnIjoiSFMyNTYifQ.eyJzdWIiOiI4NTg2NDQiLCJqdGkiOiI2YWU5N2FhMTNiNWYzNjA4OTUzODQ0OWIiLCJpc011bHRpQ2xpZW50IjpmYWxzZSwiaXNQbHVzUGxhbiI6dHJ1ZSwiaWF0IjoxNzkzNjg2MTc3LCJpc3MiOiJ1ZGFwaS1nYXRld2F5LXNlcnZpY2UiLCJleHAiOjE3OTYyNDg4MDB9.5R7yYXsWNFtpkeo2DMinZ79cc35AZQ0e_lLqWVmntaE"
 )
 
 // AlgoNameHeader is sent as X-Algo-Name on order calls.

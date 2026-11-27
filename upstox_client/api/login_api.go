@@ -83,7 +83,7 @@ func (a *LoginApiService) Authorize(ctx context.Context, clientId string, redire
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -108,16 +108,6 @@ func (a *LoginApiService) Authorize(ctx context.Context, clientId string, redire
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarHttpResponse, newErr
-		}
 		if localVarHttpResponse.StatusCode == 400 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -128,7 +118,7 @@ func (a *LoginApiService) Authorize(ctx context.Context, clientId string, redire
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
+		if localVarHttpResponse.StatusCode == 401 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -148,7 +138,7 @@ func (a *LoginApiService) Authorize(ctx context.Context, clientId string, redire
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -168,6 +158,16 @@ func (a *LoginApiService) Authorize(ctx context.Context, clientId string, redire
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -178,7 +178,7 @@ func (a *LoginApiService) Authorize(ctx context.Context, clientId string, redire
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 401 {
+		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -235,7 +235,7 @@ func (a *LoginApiService) GenerateTokenViaTotpAndPin(ctx context.Context, body m
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -274,8 +274,8 @@ func (a *LoginApiService) GenerateTokenViaTotpAndPin(ctx context.Context, body m
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.TokenResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -294,7 +294,7 @@ func (a *LoginApiService) GenerateTokenViaTotpAndPin(ctx context.Context, body m
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
+		if localVarHttpResponse.StatusCode == 401 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -314,7 +314,7 @@ func (a *LoginApiService) GenerateTokenViaTotpAndPin(ctx context.Context, body m
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -334,6 +334,16 @@ func (a *LoginApiService) GenerateTokenViaTotpAndPin(ctx context.Context, body m
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -344,17 +354,7 @@ func (a *LoginApiService) GenerateTokenViaTotpAndPin(ctx context.Context, body m
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.TokenResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 401 {
+		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -409,7 +409,7 @@ func (a *LoginApiService) InitTokenRequestForIndieUser(ctx context.Context, body
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -444,8 +444,8 @@ func (a *LoginApiService) InitTokenRequestForIndieUser(ctx context.Context, body
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.IndieUserInitTokenResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -464,7 +464,7 @@ func (a *LoginApiService) InitTokenRequestForIndieUser(ctx context.Context, body
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
+		if localVarHttpResponse.StatusCode == 401 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -484,7 +484,7 @@ func (a *LoginApiService) InitTokenRequestForIndieUser(ctx context.Context, body
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -504,6 +504,16 @@ func (a *LoginApiService) InitTokenRequestForIndieUser(ctx context.Context, body
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -514,17 +524,7 @@ func (a *LoginApiService) InitTokenRequestForIndieUser(ctx context.Context, body
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.IndieUserInitTokenResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 401 {
+		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -573,7 +573,7 @@ func (a *LoginApiService) Logout(ctx context.Context) (models.LogoutResponse, *h
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -606,8 +606,8 @@ func (a *LoginApiService) Logout(ctx context.Context) (models.LogoutResponse, *h
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.LogoutResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -626,8 +626,8 @@ func (a *LoginApiService) Logout(ctx context.Context) (models.LogoutResponse, *h
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 401 {
+			var v models.OAuthClientException
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -646,7 +646,7 @@ func (a *LoginApiService) Logout(ctx context.Context) (models.LogoutResponse, *h
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -666,6 +666,16 @@ func (a *LoginApiService) Logout(ctx context.Context) (models.LogoutResponse, *h
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -676,18 +686,8 @@ func (a *LoginApiService) Logout(ctx context.Context) (models.LogoutResponse, *h
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.LogoutResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 401 {
-			var v models.OAuthClientException
+		if localVarHttpResponse.StatusCode == 500 {
+			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -756,7 +756,7 @@ func (a *LoginApiService) Token(ctx context.Context, code string, clientId strin
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -795,8 +795,8 @@ func (a *LoginApiService) Token(ctx context.Context, code string, clientId strin
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.TokenResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -815,7 +815,7 @@ func (a *LoginApiService) Token(ctx context.Context, code string, clientId strin
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
+		if localVarHttpResponse.StatusCode == 401 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -835,7 +835,7 @@ func (a *LoginApiService) Token(ctx context.Context, code string, clientId strin
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -855,6 +855,16 @@ func (a *LoginApiService) Token(ctx context.Context, code string, clientId strin
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -865,17 +875,7 @@ func (a *LoginApiService) Token(ctx context.Context, code string, clientId strin
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.TokenResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 401 {
+		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {

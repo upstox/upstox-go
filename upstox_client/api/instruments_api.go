@@ -103,7 +103,7 @@ func (a *InstrumentsApiService) SearchInstrument(ctx context.Context, query stri
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -136,8 +136,8 @@ func (a *InstrumentsApiService) SearchInstrument(ctx context.Context, query stri
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.SearchInstrumentResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -147,16 +147,6 @@ func (a *InstrumentsApiService) SearchInstrument(ctx context.Context, query stri
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -176,7 +166,7 @@ func (a *InstrumentsApiService) SearchInstrument(ctx context.Context, query stri
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -196,6 +186,16 @@ func (a *InstrumentsApiService) SearchInstrument(ctx context.Context, query stri
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -206,8 +206,8 @@ func (a *InstrumentsApiService) SearchInstrument(ctx context.Context, query stri
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.SearchInstrumentResponse
+		if localVarHttpResponse.StatusCode == 500 {
+			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)

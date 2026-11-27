@@ -61,7 +61,7 @@ func (a *IPOApiService) ApplyForIpo(ctx context.Context, body models.IpoApplyReq
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -96,8 +96,8 @@ func (a *IPOApiService) ApplyForIpo(ctx context.Context, body models.IpoApplyReq
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.IpoApplyResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -116,7 +116,7 @@ func (a *IPOApiService) ApplyForIpo(ctx context.Context, body models.IpoApplyReq
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
+		if localVarHttpResponse.StatusCode == 401 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -136,7 +136,17 @@ func (a *IPOApiService) ApplyForIpo(ctx context.Context, body models.IpoApplyReq
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 404 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -156,6 +166,16 @@ func (a *IPOApiService) ApplyForIpo(ctx context.Context, body models.IpoApplyReq
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -166,27 +186,7 @@ func (a *IPOApiService) ApplyForIpo(ctx context.Context, body models.IpoApplyReq
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.IpoApplyResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 404 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 401 {
+		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -237,7 +237,7 @@ func (a *IPOApiService) CancelIpoOrder(ctx context.Context, orderId string) (mod
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -270,8 +270,8 @@ func (a *IPOApiService) CancelIpoOrder(ctx context.Context, orderId string) (mod
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.IpoCancelResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -290,7 +290,7 @@ func (a *IPOApiService) CancelIpoOrder(ctx context.Context, orderId string) (mod
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
+		if localVarHttpResponse.StatusCode == 401 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -310,7 +310,17 @@ func (a *IPOApiService) CancelIpoOrder(ctx context.Context, orderId string) (mod
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 404 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -330,6 +340,16 @@ func (a *IPOApiService) CancelIpoOrder(ctx context.Context, orderId string) (mod
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -340,27 +360,7 @@ func (a *IPOApiService) CancelIpoOrder(ctx context.Context, orderId string) (mod
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.IpoCancelResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 404 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 401 {
+		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -411,7 +411,7 @@ func (a *IPOApiService) GetIpoDetails(ctx context.Context, id string) (models.Ip
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -444,8 +444,8 @@ func (a *IPOApiService) GetIpoDetails(ctx context.Context, id string) (models.Ip
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.IpoDetailsResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -464,7 +464,7 @@ func (a *IPOApiService) GetIpoDetails(ctx context.Context, id string) (models.Ip
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
+		if localVarHttpResponse.StatusCode == 401 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -484,7 +484,7 @@ func (a *IPOApiService) GetIpoDetails(ctx context.Context, id string) (models.Ip
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -504,6 +504,16 @@ func (a *IPOApiService) GetIpoDetails(ctx context.Context, id string) (models.Ip
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -514,17 +524,7 @@ func (a *IPOApiService) GetIpoDetails(ctx context.Context, id string) (models.Ip
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.IpoDetailsResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 401 {
+		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -597,7 +597,7 @@ func (a *IPOApiService) GetIpoListing(ctx context.Context, localVarOptionals *IP
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -630,8 +630,8 @@ func (a *IPOApiService) GetIpoListing(ctx context.Context, localVarOptionals *IP
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.IpoListingResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -650,7 +650,7 @@ func (a *IPOApiService) GetIpoListing(ctx context.Context, localVarOptionals *IP
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
+		if localVarHttpResponse.StatusCode == 401 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -670,7 +670,7 @@ func (a *IPOApiService) GetIpoListing(ctx context.Context, localVarOptionals *IP
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -690,6 +690,16 @@ func (a *IPOApiService) GetIpoListing(ctx context.Context, localVarOptionals *IP
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -700,17 +710,7 @@ func (a *IPOApiService) GetIpoListing(ctx context.Context, localVarOptionals *IP
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.IpoListingResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 401 {
+		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -761,7 +761,7 @@ func (a *IPOApiService) GetIpoOrderById(ctx context.Context, orderId string) (mo
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -794,8 +794,8 @@ func (a *IPOApiService) GetIpoOrderById(ctx context.Context, orderId string) (mo
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.IpoOrderDetailResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -814,7 +814,7 @@ func (a *IPOApiService) GetIpoOrderById(ctx context.Context, orderId string) (mo
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
+		if localVarHttpResponse.StatusCode == 401 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -834,7 +834,17 @@ func (a *IPOApiService) GetIpoOrderById(ctx context.Context, orderId string) (mo
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 404 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -854,6 +864,16 @@ func (a *IPOApiService) GetIpoOrderById(ctx context.Context, orderId string) (mo
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -864,27 +884,7 @@ func (a *IPOApiService) GetIpoOrderById(ctx context.Context, orderId string) (mo
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.IpoOrderDetailResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 404 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 401 {
+		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -947,7 +947,7 @@ func (a *IPOApiService) GetIpoOrders(ctx context.Context, localVarOptionals *IPO
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -980,8 +980,8 @@ func (a *IPOApiService) GetIpoOrders(ctx context.Context, localVarOptionals *IPO
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.IpoOrderResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -1000,7 +1000,7 @@ func (a *IPOApiService) GetIpoOrders(ctx context.Context, localVarOptionals *IPO
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 500 {
+		if localVarHttpResponse.StatusCode == 401 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1020,7 +1020,7 @@ func (a *IPOApiService) GetIpoOrders(ctx context.Context, localVarOptionals *IPO
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1040,6 +1040,16 @@ func (a *IPOApiService) GetIpoOrders(ctx context.Context, localVarOptionals *IPO
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -1050,17 +1060,7 @@ func (a *IPOApiService) GetIpoOrders(ctx context.Context, localVarOptionals *IPO
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.IpoOrderResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 401 {
+		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {

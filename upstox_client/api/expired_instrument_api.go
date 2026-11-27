@@ -63,7 +63,7 @@ func (a *ExpiredInstrumentApiService) GetExpiredFutureContracts(ctx context.Cont
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -96,8 +96,8 @@ func (a *ExpiredInstrumentApiService) GetExpiredFutureContracts(ctx context.Cont
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.GetExpiredFuturesContractResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -107,16 +107,6 @@ func (a *ExpiredInstrumentApiService) GetExpiredFutureContracts(ctx context.Cont
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -136,7 +126,7 @@ func (a *ExpiredInstrumentApiService) GetExpiredFutureContracts(ctx context.Cont
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -156,6 +146,16 @@ func (a *ExpiredInstrumentApiService) GetExpiredFutureContracts(ctx context.Cont
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -166,8 +166,8 @@ func (a *ExpiredInstrumentApiService) GetExpiredFutureContracts(ctx context.Cont
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.GetExpiredFuturesContractResponse
+		if localVarHttpResponse.StatusCode == 500 {
+			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -223,7 +223,7 @@ func (a *ExpiredInstrumentApiService) GetExpiredHistoricalCandleData(ctx context
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -256,8 +256,8 @@ func (a *ExpiredInstrumentApiService) GetExpiredHistoricalCandleData(ctx context
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.GetHistoricalCandleResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -267,16 +267,6 @@ func (a *ExpiredInstrumentApiService) GetExpiredHistoricalCandleData(ctx context
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -296,7 +286,7 @@ func (a *ExpiredInstrumentApiService) GetExpiredHistoricalCandleData(ctx context
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -316,6 +306,16 @@ func (a *ExpiredInstrumentApiService) GetExpiredHistoricalCandleData(ctx context
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -326,8 +326,8 @@ func (a *ExpiredInstrumentApiService) GetExpiredHistoricalCandleData(ctx context
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.GetHistoricalCandleResponse
+		if localVarHttpResponse.StatusCode == 500 {
+			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -379,7 +379,7 @@ func (a *ExpiredInstrumentApiService) GetExpiredOptionContracts(ctx context.Cont
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -412,8 +412,8 @@ func (a *ExpiredInstrumentApiService) GetExpiredOptionContracts(ctx context.Cont
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.GetOptionContractResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -423,16 +423,6 @@ func (a *ExpiredInstrumentApiService) GetExpiredOptionContracts(ctx context.Cont
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -452,7 +442,7 @@ func (a *ExpiredInstrumentApiService) GetExpiredOptionContracts(ctx context.Cont
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -472,6 +462,16 @@ func (a *ExpiredInstrumentApiService) GetExpiredOptionContracts(ctx context.Cont
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -482,8 +482,8 @@ func (a *ExpiredInstrumentApiService) GetExpiredOptionContracts(ctx context.Cont
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.GetOptionContractResponse
+		if localVarHttpResponse.StatusCode == 500 {
+			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -533,7 +533,7 @@ func (a *ExpiredInstrumentApiService) GetExpiriesResponse(ctx context.Context, i
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -566,8 +566,8 @@ func (a *ExpiredInstrumentApiService) GetExpiriesResponse(ctx context.Context, i
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.GetExpiriesResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -577,16 +577,6 @@ func (a *ExpiredInstrumentApiService) GetExpiriesResponse(ctx context.Context, i
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -606,7 +596,7 @@ func (a *ExpiredInstrumentApiService) GetExpiriesResponse(ctx context.Context, i
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -626,6 +616,16 @@ func (a *ExpiredInstrumentApiService) GetExpiriesResponse(ctx context.Context, i
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -636,8 +636,8 @@ func (a *ExpiredInstrumentApiService) GetExpiriesResponse(ctx context.Context, i
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.GetExpiriesResponse
+		if localVarHttpResponse.StatusCode == 500 {
+			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)

@@ -68,7 +68,7 @@ func (a *MarketQuoteV3ApiService) GetFullMarketQuoteV3(ctx context.Context, loca
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -101,8 +101,8 @@ func (a *MarketQuoteV3ApiService) GetFullMarketQuoteV3(ctx context.Context, loca
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.GetFullMarketQuoteResponseV3
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -112,16 +112,6 @@ func (a *MarketQuoteV3ApiService) GetFullMarketQuoteV3(ctx context.Context, loca
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -141,7 +131,7 @@ func (a *MarketQuoteV3ApiService) GetFullMarketQuoteV3(ctx context.Context, loca
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -161,6 +151,16 @@ func (a *MarketQuoteV3ApiService) GetFullMarketQuoteV3(ctx context.Context, loca
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -171,8 +171,8 @@ func (a *MarketQuoteV3ApiService) GetFullMarketQuoteV3(ctx context.Context, loca
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.GetFullMarketQuoteResponseV3
+		if localVarHttpResponse.StatusCode == 500 {
+			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -229,7 +229,7 @@ func (a *MarketQuoteV3ApiService) GetLtp(ctx context.Context, localVarOptionals 
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -262,8 +262,8 @@ func (a *MarketQuoteV3ApiService) GetLtp(ctx context.Context, localVarOptionals 
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.GetMarketQuoteLastTradedPriceResponseV3
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -273,16 +273,6 @@ func (a *MarketQuoteV3ApiService) GetLtp(ctx context.Context, localVarOptionals 
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -302,7 +292,7 @@ func (a *MarketQuoteV3ApiService) GetLtp(ctx context.Context, localVarOptionals 
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -322,6 +312,16 @@ func (a *MarketQuoteV3ApiService) GetLtp(ctx context.Context, localVarOptionals 
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -332,8 +332,8 @@ func (a *MarketQuoteV3ApiService) GetLtp(ctx context.Context, localVarOptionals 
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.GetMarketQuoteLastTradedPriceResponseV3
+		if localVarHttpResponse.StatusCode == 500 {
+			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -395,7 +395,7 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOHLCV3(ctx context.Context, inte
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -428,8 +428,8 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOHLCV3(ctx context.Context, inte
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.GetMarketQuoteOhlcResponseV3
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -439,16 +439,6 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOHLCV3(ctx context.Context, inte
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -468,7 +458,7 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOHLCV3(ctx context.Context, inte
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -488,6 +478,16 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOHLCV3(ctx context.Context, inte
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -498,8 +498,8 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOHLCV3(ctx context.Context, inte
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.GetMarketQuoteOhlcResponseV3
+		if localVarHttpResponse.StatusCode == 500 {
+			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -556,7 +556,7 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOptionGreek(ctx context.Context,
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"*/*", "application/json"}
+	localVarHttpHeaderAccepts := []string{"application/json", "*/*"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := upstox_client.SelectHeaderAccept(localVarHttpHeaderAccepts)
@@ -589,8 +589,8 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOptionGreek(ctx context.Context,
 
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := upstox_client.NewGenericSwaggerError(localVarBody, localVarHttpResponse.Status, nil)
-		if localVarHttpResponse.StatusCode == 405 {
-			var v models.ApiGatewayErrorResponse
+		if localVarHttpResponse.StatusCode == 200 {
+			var v models.GetMarketQuoteOptionGreekResponseV3
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
@@ -600,16 +600,6 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOptionGreek(ctx context.Context,
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 400 {
-			var v models.ApiGatewayErrorResponse
-			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		if localVarHttpResponse.StatusCode == 500 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -629,7 +619,7 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOptionGreek(ctx context.Context,
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 423 {
+		if localVarHttpResponse.StatusCode == 405 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -649,6 +639,16 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOptionGreek(ctx context.Context,
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
+		if localVarHttpResponse.StatusCode == 423 {
+			var v models.ApiGatewayErrorResponse
+			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 429 {
 			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
@@ -659,8 +659,8 @@ func (a *MarketQuoteV3ApiService) GetMarketQuoteOptionGreek(ctx context.Context,
 			newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), newErr.Error(), v)
 			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v models.GetMarketQuoteOptionGreekResponseV3
+		if localVarHttpResponse.StatusCode == 500 {
+			var v models.ApiGatewayErrorResponse
 			err = a.client.Decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr = upstox_client.NewGenericSwaggerError(newErr.Body(), err.Error(), nil)

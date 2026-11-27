@@ -35,7 +35,7 @@ OAUTH2
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: */*, application/json
+ - **Accept**: application/json, */*
 
 [[Back to top]](#) [Back to API list] [Back to Model list] [Back to README]
 
@@ -63,7 +63,7 @@ OAUTH2
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: */*, application/json
+ - **Accept**: application/json, */*
 
 [[Back to top]](#) [Back to API list] [Back to Model list] [Back to README]
 

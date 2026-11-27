@@ -31,13 +31,13 @@ func main() {
 		DisclosedQuantity: 0,
 		TriggerPrice:      0,
 	}
-	resp, _, err := orderV3Api.ModifyOrderV3(context.Background(), body, nil)
+	resp, _, err := orderV3Api.ModifyOrder(context.Background(), body, nil)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling OrderV3Api.ModifyOrderV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling OrderV3Api.ModifyOrder:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling OrderV3Api.ModifyOrderV3:", err)
+			fmt.Println("Exception when calling OrderV3Api.ModifyOrder:", err)
 		}
 		return
 	}

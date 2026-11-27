@@ -61,18 +61,18 @@ func main() {
 	r.expect("cancel order giving wrong response", err, "UDAPI100010")
 
 	v3 := api.NewOrderV3Api(c)
-	placedV3, _, err := v3.PlaceOrderV3(ctx, models.PlaceOrderV3Request{
+	placedV3, _, err := v3.PlaceOrder(ctx, models.PlaceOrderV3Request{
 		Quantity: 1, Product: "D", Validity: "DAY", Price: 9.12, Tag: "string", InstrumentToken: ideaKey,
 		OrderType: "LIMIT", TransactionType: "BUY", IsAmo: true, Slice: true,
 	}, nil)
 	r.show(placedV3, err, "Exception when calling OrderApiV3->place_order")
 
-	_, _, err = v3.ModifyOrderV3(ctx, models.ModifyOrderRequest{
+	_, _, err = v3.ModifyOrder(ctx, models.ModifyOrderRequest{
 		Quantity: 3, Validity: "DAY", Price: 9.12, OrderId: "250120010373947", OrderType: "LIMIT",
 	}, nil)
 	r.expect("modify order v3 giving wrong response", err, "UDAPI100010")
 
-	_, _, err = v3.CancelOrderV3(ctx, "25012112309073", nil)
+	_, _, err = v3.CancelOrder(ctx, "25012112309073", nil)
 	r.expect("cancel order v3 giving wrong response", err, "UDAPI100010")
 
 	fmt.Printf("%d checks, %d failed\n", r.checks, r.failed)

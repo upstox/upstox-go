@@ -20,13 +20,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetHistoricalCandleDataRangeV3(context.Background(), "NSE_EQ|INE848E01016", "minutes", 1, "2025-01-02", "2025-01-01")
+	resp, _, err := historyV3Api.GetHistoricalCandleDataRange(context.Background(), "NSE_EQ|INE848E01016", "minutes", 1, "2025-01-02", "2025-01-01")
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", err)
 		}
 		return
 	}
@@ -61,13 +61,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetHistoricalCandleDataRangeV3(context.Background(), "NSE_EQ|INE848E01016", "minutes", 3, "2025-01-02", "2025-01-01")
+	resp, _, err := historyV3Api.GetHistoricalCandleDataRange(context.Background(), "NSE_EQ|INE848E01016", "minutes", 3, "2025-01-02", "2025-01-01")
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", err)
 		}
 		return
 	}
@@ -102,13 +102,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetHistoricalCandleDataRangeV3(context.Background(), "NSE_EQ|INE848E01016", "minutes", 15, "2025-01-04", "2025-01-01")
+	resp, _, err := historyV3Api.GetHistoricalCandleDataRange(context.Background(), "NSE_EQ|INE848E01016", "minutes", 15, "2025-01-04", "2025-01-01")
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", err)
 		}
 		return
 	}
@@ -143,13 +143,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetHistoricalCandleDataRangeV3(context.Background(), "NSE_EQ|INE848E01016", "hours", 1, "2025-02-01", "2025-01-01")
+	resp, _, err := historyV3Api.GetHistoricalCandleDataRange(context.Background(), "NSE_EQ|INE848E01016", "hours", 1, "2025-02-01", "2025-01-01")
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", err)
 		}
 		return
 	}
@@ -184,13 +184,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetHistoricalCandleDataRangeV3(context.Background(), "NSE_EQ|INE848E01016", "hours", 4, "2025-02-01", "2025-01-01")
+	resp, _, err := historyV3Api.GetHistoricalCandleDataRange(context.Background(), "NSE_EQ|INE848E01016", "hours", 4, "2025-02-01", "2025-01-01")
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", err)
 		}
 		return
 	}
@@ -225,13 +225,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetHistoricalCandleDataRangeV3(context.Background(), "NSE_EQ|INE848E01016", "days", 1, "2025-03-01", "2025-01-01")
+	resp, _, err := historyV3Api.GetHistoricalCandleDataRange(context.Background(), "NSE_EQ|INE848E01016", "days", 1, "2025-03-01", "2025-01-01")
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", err)
 		}
 		return
 	}
@@ -266,13 +266,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetHistoricalCandleDataRangeV3(context.Background(), "NSE_EQ|INE848E01016", "weeks", 1, "2025-01-01", "2024-01-01")
+	resp, _, err := historyV3Api.GetHistoricalCandleDataRange(context.Background(), "NSE_EQ|INE848E01016", "weeks", 1, "2025-01-01", "2024-01-01")
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", err)
 		}
 		return
 	}
@@ -307,13 +307,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetHistoricalCandleDataRangeV3(context.Background(), "NSE_EQ|INE848E01016", "months", 1, "2025-01-01", "2010-01-01")
+	resp, _, err := historyV3Api.GetHistoricalCandleDataRange(context.Background(), "NSE_EQ|INE848E01016", "months", 1, "2025-01-01", "2010-01-01")
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRangeV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetHistoricalCandleDataRange:", err)
 		}
 		return
 	}

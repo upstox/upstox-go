@@ -21,13 +21,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	orderV3Api := api.NewOrderV3Api(client)
 
-	resp, _, err := orderV3Api.CancelOrderV3(context.Background(), "2501211050101", nil)
+	resp, _, err := orderV3Api.CancelOrder(context.Background(), "2501211050101", nil)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling OrderV3Api.CancelOrderV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling OrderV3Api.CancelOrder:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling OrderV3Api.CancelOrderV3:", err)
+			fmt.Println("Exception when calling OrderV3Api.CancelOrder:", err)
 		}
 		return
 	}

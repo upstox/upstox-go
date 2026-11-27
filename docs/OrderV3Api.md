@@ -5,12 +5,12 @@ All URIs are relative to *https://api.upstox.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CancelGTTOrder**](OrderV3Api.md#CancelGTTOrder) | **Delete** /v3/order/gtt/cancel | Cancel GTT order
-[**CancelOrderV3**](OrderV3Api.md#CancelOrderV3) | **Delete** /v3/order/cancel | 
+[**CancelOrder**](OrderV3Api.md#CancelOrder) | **Delete** /v3/order/cancel | 
 [**GetGttOrderDetails**](OrderV3Api.md#GetGttOrderDetails) | **Get** /v3/order/gtt | Get GTT order details
 [**ModifyGTTOrder**](OrderV3Api.md#ModifyGTTOrder) | **Put** /v3/order/gtt/modify | Modify GTT order
-[**ModifyOrderV3**](OrderV3Api.md#ModifyOrderV3) | **Put** /v3/order/modify | 
+[**ModifyOrder**](OrderV3Api.md#ModifyOrder) | **Put** /v3/order/modify | 
 [**PlaceGTTOrder**](OrderV3Api.md#PlaceGTTOrder) | **Post** /v3/order/gtt/place | Place GTT order
-[**PlaceOrderV3**](OrderV3Api.md#PlaceOrderV3) | **Post** /v3/order/place | 
+[**PlaceOrder**](OrderV3Api.md#PlaceOrder) | **Post** /v3/order/place | 
 
 # **CancelGTTOrder**
 > GttTriggerOrderResponse CancelGTTOrder(ctx, body, optional)
@@ -49,8 +49,8 @@ OAUTH2
 
 [[Back to top]](#) [Back to API list] [Back to Model list] [Back to README]
 
-# **CancelOrderV3**
-> CancelOrderV3Response CancelOrderV3(ctx, orderId, optional)
+# **CancelOrder**
+> CancelOrderV3Response CancelOrder(ctx, orderId, optional)
 
 
 ### Required Parameters
@@ -59,10 +59,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **orderId** | **string**|  | 
- **optional** | ***OrderV3ApiCancelOrderV3Opts** | optional parameters | nil if no parameters
+ **optional** | ***OrderV3ApiCancelOrderOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a OrderV3ApiCancelOrderV3Opts struct
+Optional parameters are passed through a pointer to a OrderV3ApiCancelOrderOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
@@ -154,8 +154,8 @@ OAUTH2
 
 [[Back to top]](#) [Back to API list] [Back to Model list] [Back to README]
 
-# **ModifyOrderV3**
-> ModifyOrderV3Response ModifyOrderV3(ctx, body, optional)
+# **ModifyOrder**
+> ModifyOrderV3Response ModifyOrder(ctx, body, optional)
 
 
 ### Required Parameters
@@ -164,10 +164,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**ModifyOrderRequest**](ModifyOrderRequest.md)|  | 
- **optional** | ***OrderV3ApiModifyOrderV3Opts** | optional parameters | nil if no parameters
+ **optional** | ***OrderV3ApiModifyOrderOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a OrderV3ApiModifyOrderV3Opts struct
+Optional parameters are passed through a pointer to a OrderV3ApiModifyOrderOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
@@ -225,8 +225,8 @@ OAUTH2
 
 [[Back to top]](#) [Back to API list] [Back to Model list] [Back to README]
 
-# **PlaceOrderV3**
-> PlaceOrderV3Response PlaceOrderV3(ctx, body, optional)
+# **PlaceOrder**
+> PlaceOrderV3Response PlaceOrder(ctx, body, optional)
 
 
 ### Required Parameters
@@ -235,10 +235,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **body** | [**PlaceOrderV3Request**](PlaceOrderV3Request.md)|  | 
- **optional** | ***OrderV3ApiPlaceOrderV3Opts** | optional parameters | nil if no parameters
+ **optional** | ***OrderV3ApiPlaceOrderOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a OrderV3ApiPlaceOrderV3Opts struct
+Optional parameters are passed through a pointer to a OrderV3ApiPlaceOrderOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 

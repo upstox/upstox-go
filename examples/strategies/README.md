@@ -2,7 +2,7 @@
 
 Ready-to-run Go programs for common Nifty 50 options strategies using the [Upstox Go SDK](https://github.com/upstox/upstox-go).
 
-Each program (`<category>/code/<strategy>/main.go`) finds the required option legs via `SearchInstrument()` on `api.NewInstrumentsApi(client)` and places market orders via `PlaceOrderV3()` on `api.NewOrderV3Api(client)`. Replace `{your_access_token}` with your token before running, then run it with `go run ./<category>/code/<strategy>` from this directory.
+Each program (`<category>/code/<strategy>/main.go`) finds the required option legs via `SearchInstrument()` on `api.NewInstrumentsApi(client)` and places market orders via `PlaceOrder()` on `api.NewOrderV3Api(client)`. Replace `{your_access_token}` with your token before running, then run it with `go run ./<category>/code/<strategy>` from this directory.
 
 > **Note:** All strategies default to **Nifty 50** but work with any index. To switch, change the `underlying` constant in the program — for example, use `"Nifty Bank"` for Bank Nifty, `"Nifty Fin Service"` for FinNifty, or `"SENSEX"` for BSE Sensex.
 

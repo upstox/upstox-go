@@ -15,13 +15,13 @@ import (
 func TestModifyOrderV3Unknown(t *testing.T) {
 	c := client(t)
 	body := models.ModifyOrderRequest{OrderId: missingOrderID, Quantity: 1, Validity: "DAY", Price: 5, OrderType: "LIMIT"}
-	resp, _, err := api.NewOrderV3Api(c).ModifyOrderV3(ctx(t), body, &api.OrderV3ApiModifyOrderV3Opts{XAlgoName: algoName()})
+	resp, _, err := api.NewOrderV3Api(c).ModifyOrder(ctx(t), body, &api.OrderV3ApiModifyOrderOpts{XAlgoName: algoName()})
 	checkAllow(t, resp, err, "UDAPI100010")
 }
 
 func TestCancelOrderV3Unknown(t *testing.T) {
 	c := client(t)
-	resp, _, err := api.NewOrderV3Api(c).CancelOrderV3(ctx(t), missingOrderID, &api.OrderV3ApiCancelOrderV3Opts{XAlgoName: algoName()})
+	resp, _, err := api.NewOrderV3Api(c).CancelOrder(ctx(t), missingOrderID, &api.OrderV3ApiCancelOrderOpts{XAlgoName: algoName()})
 	checkAllow(t, resp, err, "UDAPI100010")
 }
 
@@ -34,7 +34,7 @@ func TestPlaceModifyCancelOrderV3(t *testing.T) {
 		Quantity: 1, Product: "D", Validity: "DAY", Price: price, Tag: testTag, Slice: true,
 		InstrumentToken: ideaKey, OrderType: "LIMIT", TransactionType: "BUY", IsAmo: amo,
 	}
-	placed, _, err := o.PlaceOrderV3(ctx(t), body, &api.OrderV3ApiPlaceOrderV3Opts{XAlgoName: algoName()})
+	placed, _, err := o.PlaceOrder(ctx(t), body, &api.OrderV3ApiPlaceOrderOpts{XAlgoName: algoName()})
 	check(t, placed, err)
 	if placed.Data == nil || len(placed.Data.OrderIds) == 0 {
 		t.Fatal("place v3 returned no order ids")
@@ -51,10 +51,10 @@ func TestPlaceModifyCancelOrderV3(t *testing.T) {
 	}
 
 	mod := models.ModifyOrderRequest{OrderId: id, Quantity: 1, Validity: "DAY", Price: farLimitPrice(price, 0.01), OrderType: "LIMIT"}
-	modified, _, err := o.ModifyOrderV3(ctx(t), mod, &api.OrderV3ApiModifyOrderV3Opts{XAlgoName: algoName()})
+	modified, _, err := o.ModifyOrder(ctx(t), mod, &api.OrderV3ApiModifyOrderOpts{XAlgoName: algoName()})
 	check(t, modified, err)
 
-	cancelled, _, err := o.CancelOrderV3(ctx(t), id, &api.OrderV3ApiCancelOrderV3Opts{XAlgoName: algoName()})
+	cancelled, _, err := o.CancelOrder(ctx(t), id, &api.OrderV3ApiCancelOrderOpts{XAlgoName: algoName()})
 	check(t, cancelled, err)
 }
 

@@ -353,16 +353,16 @@ MarketQuoteV3ApiService Market quotes and instruments - OHLC quotes
 This API provides the functionality to retrieve the OHLC quotes for one or more instruments.This API returns the OHLC snapshots of up to 500 instruments in one go.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param interval Interval to get ohlc data
- * @param optional nil or *MarketQuoteV3ApiGetMarketQuoteOHLCV3Opts - Optional Parameters:
+ * @param optional nil or *MarketQuoteV3ApiGetMarketQuoteOHLCOpts - Optional Parameters:
      * @param "InstrumentKey" (optional.String) -  Comma separated list of instrument keys
 @return GetMarketQuoteOhlcResponseV3
 */
 
-type MarketQuoteV3ApiGetMarketQuoteOHLCV3Opts struct {
+type MarketQuoteV3ApiGetMarketQuoteOHLCOpts struct {
 	InstrumentKey optional.String
 }
 
-func (a *MarketQuoteV3ApiService) GetMarketQuoteOHLCV3(ctx context.Context, interval string, localVarOptionals *MarketQuoteV3ApiGetMarketQuoteOHLCV3Opts) (models.GetMarketQuoteOhlcResponseV3, *http.Response, error) {
+func (a *MarketQuoteV3ApiService) GetMarketQuoteOHLC(ctx context.Context, interval string, localVarOptionals *MarketQuoteV3ApiGetMarketQuoteOHLCOpts) (models.GetMarketQuoteOhlcResponseV3, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}

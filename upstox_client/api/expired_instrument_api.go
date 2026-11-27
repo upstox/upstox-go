@@ -506,7 +506,7 @@ This API provides the functionality to retrieve expiry dates for a given instrum
 
 @return GetExpiriesResponse
 */
-func (a *ExpiredInstrumentApiService) GetExpiriesResponse(ctx context.Context, instrumentKey string) (models.GetExpiriesResponse, *http.Response, error) {
+func (a *ExpiredInstrumentApiService) GetExpiries(ctx context.Context, instrumentKey string) (models.GetExpiriesResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}

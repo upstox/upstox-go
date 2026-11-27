@@ -13,7 +13,7 @@ import (
 // pastExpiries returns NIFTY expiries before today, newest first.
 func pastExpiries(t *testing.T, c *upstox_client.APIClient) []string {
 	t.Helper()
-	resp, _, err := api.NewExpiredInstrumentApi(c).GetExpiriesResponse(ctx(t), niftyKey)
+	resp, _, err := api.NewExpiredInstrumentApi(c).GetExpiries(ctx(t), niftyKey)
 	check(t, resp, err)
 	var out []string
 	for i := len(resp.Data) - 1; i >= 0; i-- {
@@ -29,7 +29,7 @@ func pastExpiries(t *testing.T, c *upstox_client.APIClient) []string {
 
 func TestGetExpiries(t *testing.T) {
 	c := client(t)
-	resp, _, err := api.NewExpiredInstrumentApi(c).GetExpiriesResponse(ctx(t), niftyKey)
+	resp, _, err := api.NewExpiredInstrumentApi(c).GetExpiries(ctx(t), niftyKey)
 	check(t, resp, err)
 	if len(resp.Data) == 0 {
 		t.Fatal("no expiries returned")

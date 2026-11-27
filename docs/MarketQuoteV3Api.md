@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetFullMarketQuoteV3**](MarketQuoteV3Api.md#GetFullMarketQuoteV3) | **Get** /v3/market-quote/quotes | Market quotes and instruments - Full market quotes
 [**GetLtp**](MarketQuoteV3Api.md#GetLtp) | **Get** /v3/market-quote/ltp | Market quotes and instruments - LTP quotes.
-[**GetMarketQuoteOHLCV3**](MarketQuoteV3Api.md#GetMarketQuoteOHLCV3) | **Get** /v3/market-quote/ohlc | Market quotes and instruments - OHLC quotes
+[**GetMarketQuoteOHLC**](MarketQuoteV3Api.md#GetMarketQuoteOHLC) | **Get** /v3/market-quote/ohlc | Market quotes and instruments - OHLC quotes
 [**GetMarketQuoteOptionGreek**](MarketQuoteV3Api.md#GetMarketQuoteOptionGreek) | **Get** /v3/market-quote/option-greek | Market quotes and instruments - Option Greek
 
 # **GetFullMarketQuoteV3**
@@ -77,8 +77,8 @@ OAUTH2
 
 [[Back to top]](#) [Back to API list] [Back to Model list] [Back to README]
 
-# **GetMarketQuoteOHLCV3**
-> GetMarketQuoteOhlcResponseV3 GetMarketQuoteOHLCV3(ctx, interval, optional)
+# **GetMarketQuoteOHLC**
+> GetMarketQuoteOhlcResponseV3 GetMarketQuoteOHLC(ctx, interval, optional)
 Market quotes and instruments - OHLC quotes
 
 This API provides the functionality to retrieve the OHLC quotes for one or more instruments.This API returns the OHLC snapshots of up to 500 instruments in one go.
@@ -89,10 +89,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **interval** | **string**| Interval to get ohlc data | 
- **optional** | ***MarketQuoteV3ApiGetMarketQuoteOHLCV3Opts** | optional parameters | nil if no parameters
+ **optional** | ***MarketQuoteV3ApiGetMarketQuoteOHLCOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a MarketQuoteV3ApiGetMarketQuoteOHLCV3Opts struct
+Optional parameters are passed through a pointer to a MarketQuoteV3ApiGetMarketQuoteOHLCOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 

@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**GetExpiredFutureContracts**](ExpiredInstrumentApi.md#GetExpiredFutureContracts) | **Get** /v2/expired-instruments/future/contract | Expired instruments - Get future contracts
 [**GetExpiredHistoricalCandleData**](ExpiredInstrumentApi.md#GetExpiredHistoricalCandleData) | **Get** /v2/expired-instruments/historical-candle/{expired_instrument_key}/{interval}/{to_date}/{from_date} | Expired Historical candle data
 [**GetExpiredOptionContracts**](ExpiredInstrumentApi.md#GetExpiredOptionContracts) | **Get** /v2/expired-instruments/option/contract | Get expired option contracts
-[**GetExpiriesResponse**](ExpiredInstrumentApi.md#GetExpiriesResponse) | **Get** /v2/expired-instruments/expiries | Expired instruments - Get expiries
+[**GetExpiries**](ExpiredInstrumentApi.md#GetExpiries) | **Get** /v2/expired-instruments/expiries | Expired instruments - Get expiries
 
 # **GetExpiredFutureContracts**
 > GetExpiredFuturesContractResponse GetExpiredFutureContracts(ctx, instrumentKey, expiryDate)
@@ -98,8 +98,8 @@ OAUTH2
 
 [[Back to top]](#) [Back to API list] [Back to Model list] [Back to README]
 
-# **GetExpiriesResponse**
-> GetExpiriesResponse GetExpiriesResponse(ctx, instrumentKey)
+# **GetExpiries**
+> GetExpiriesResponse GetExpiries(ctx, instrumentKey)
 Expired instruments - Get expiries
 
 This API provides the functionality to retrieve expiry dates for a given instrument key.

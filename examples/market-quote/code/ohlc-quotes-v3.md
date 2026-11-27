@@ -23,13 +23,13 @@ func main() {
 	marketQuoteV3Api := api.NewMarketQuoteV3Api(client)
 
 	// For a single instrument
-	resp, _, err := marketQuoteV3Api.GetMarketQuoteOHLCV3(context.Background(), "1d", &api.MarketQuoteV3ApiGetMarketQuoteOHLCV3Opts{InstrumentKey: optional.NewString("NSE_EQ|INE669E01016")})
+	resp, _, err := marketQuoteV3Api.GetMarketQuoteOHLC(context.Background(), "1d", &api.MarketQuoteV3ApiGetMarketQuoteOHLCOpts{InstrumentKey: optional.NewString("NSE_EQ|INE669E01016")})
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling MarketQuoteV3Api.GetMarketQuoteOHLCV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling MarketQuoteV3Api.GetMarketQuoteOHLC:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling MarketQuoteV3Api.GetMarketQuoteOHLCV3:", err)
+			fmt.Println("Exception when calling MarketQuoteV3Api.GetMarketQuoteOHLC:", err)
 		}
 		return
 	}
@@ -63,13 +63,13 @@ func main() {
 	marketQuoteV3Api := api.NewMarketQuoteV3Api(client)
 
 	// For multiple instruments
-	resp, _, err := marketQuoteV3Api.GetMarketQuoteOHLCV3(context.Background(), "1d", &api.MarketQuoteV3ApiGetMarketQuoteOHLCV3Opts{InstrumentKey: optional.NewString("NSE_EQ|INE669E01016,NSE_EQ|INE848E01016")})
+	resp, _, err := marketQuoteV3Api.GetMarketQuoteOHLC(context.Background(), "1d", &api.MarketQuoteV3ApiGetMarketQuoteOHLCOpts{InstrumentKey: optional.NewString("NSE_EQ|INE669E01016,NSE_EQ|INE848E01016")})
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling MarketQuoteV3Api.GetMarketQuoteOHLCV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling MarketQuoteV3Api.GetMarketQuoteOHLC:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling MarketQuoteV3Api.GetMarketQuoteOHLCV3:", err)
+			fmt.Println("Exception when calling MarketQuoteV3Api.GetMarketQuoteOHLC:", err)
 		}
 		return
 	}

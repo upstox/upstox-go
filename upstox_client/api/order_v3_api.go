@@ -199,16 +199,16 @@ func (a *OrderV3ApiService) CancelGTTOrder(ctx context.Context, body models.GttC
 OrderV3ApiService
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param orderId
- * @param optional nil or *OrderV3ApiCancelOrderV3Opts - Optional Parameters:
+ * @param optional nil or *OrderV3ApiCancelOrderOpts - Optional Parameters:
      * @param "XAlgoName" (optional.String) -  Algorithm name, used to track and manage orders
 @return CancelOrderV3Response
 */
 
-type OrderV3ApiCancelOrderV3Opts struct {
+type OrderV3ApiCancelOrderOpts struct {
 	XAlgoName optional.String
 }
 
-func (a *OrderV3ApiService) CancelOrderV3(ctx context.Context, orderId string, localVarOptionals *OrderV3ApiCancelOrderV3Opts) (models.CancelOrderV3Response, *http.Response, error) {
+func (a *OrderV3ApiService) CancelOrder(ctx context.Context, orderId string, localVarOptionals *OrderV3ApiCancelOrderOpts) (models.CancelOrderV3Response, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Delete")
 		localVarPostBody    interface{}
@@ -694,16 +694,16 @@ func (a *OrderV3ApiService) ModifyGTTOrder(ctx context.Context, body models.GttM
 OrderV3ApiService
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
- * @param optional nil or *OrderV3ApiModifyOrderV3Opts - Optional Parameters:
+ * @param optional nil or *OrderV3ApiModifyOrderOpts - Optional Parameters:
      * @param "XAlgoName" (optional.String) -  Algorithm name, used to track and manage orders
 @return ModifyOrderV3Response
 */
 
-type OrderV3ApiModifyOrderV3Opts struct {
+type OrderV3ApiModifyOrderOpts struct {
 	XAlgoName optional.String
 }
 
-func (a *OrderV3ApiService) ModifyOrderV3(ctx context.Context, body models.ModifyOrderRequest, localVarOptionals *OrderV3ApiModifyOrderV3Opts) (models.ModifyOrderV3Response, *http.Response, error) {
+func (a *OrderV3ApiService) ModifyOrder(ctx context.Context, body models.ModifyOrderRequest, localVarOptionals *OrderV3ApiModifyOrderOpts) (models.ModifyOrderV3Response, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
@@ -1026,16 +1026,16 @@ func (a *OrderV3ApiService) PlaceGTTOrder(ctx context.Context, body models.GttPl
 OrderV3ApiService
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
- * @param optional nil or *OrderV3ApiPlaceOrderV3Opts - Optional Parameters:
+ * @param optional nil or *OrderV3ApiPlaceOrderOpts - Optional Parameters:
      * @param "XAlgoName" (optional.String) -  Algorithm name, used to track and manage orders
 @return PlaceOrderV3Response
 */
 
-type OrderV3ApiPlaceOrderV3Opts struct {
+type OrderV3ApiPlaceOrderOpts struct {
 	XAlgoName optional.String
 }
 
-func (a *OrderV3ApiService) PlaceOrderV3(ctx context.Context, body models.PlaceOrderV3Request, localVarOptionals *OrderV3ApiPlaceOrderV3Opts) (models.PlaceOrderV3Response, *http.Response, error) {
+func (a *OrderV3ApiService) PlaceOrder(ctx context.Context, body models.PlaceOrderV3Request, localVarOptionals *OrderV3ApiPlaceOrderOpts) (models.PlaceOrderV3Response, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Post")
 		localVarPostBody    interface{}

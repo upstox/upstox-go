@@ -36,13 +36,13 @@ func main() {
 		IsAmo:             false,
 		Slice:             true,
 	}
-	resp, _, err := orderV3Api.PlaceOrderV3(context.Background(), body, nil)
+	resp, _, err := orderV3Api.PlaceOrder(context.Background(), body, nil)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling OrderV3Api.PlaceOrderV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling OrderV3Api.PlaceOrder:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling OrderV3Api.PlaceOrderV3:", err)
+			fmt.Println("Exception when calling OrderV3Api.PlaceOrder:", err)
 		}
 		return
 	}
@@ -93,13 +93,13 @@ func main() {
 		IsAmo:             false,
 		Slice:             false,
 	}
-	resp, _, err := orderV3Api.PlaceOrderV3(context.Background(), body, nil)
+	resp, _, err := orderV3Api.PlaceOrder(context.Background(), body, nil)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling OrderV3Api.PlaceOrderV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling OrderV3Api.PlaceOrder:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling OrderV3Api.PlaceOrderV3:", err)
+			fmt.Println("Exception when calling OrderV3Api.PlaceOrder:", err)
 		}
 		return
 	}

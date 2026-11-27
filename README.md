@@ -82,7 +82,7 @@ func main() {
 ```
 
 Create a service from the client with `api.New<Service>Api(client)` (like Python's `upstox_client.OrderApi(api_client)`). Every call has the same shape: `<service>.<Method>(ctx, <required params>, opts)`, returning the decoded response, the raw `*http.Response` and an error.
-Optional parameters go in a `*api.<Service>Api<Method>Opts` struct built with [`github.com/antihax/optional`](https://pkg.go.dev/github.com/antihax/optional), e.g. `&api.OrderV3ApiPlaceOrderV3Opts{XAlgoName: optional.NewString("my-algo")}`; pass `nil` when there are none.
+Optional parameters go in a `*api.<Service>Api<Method>Opts` struct built with [`github.com/antihax/optional`](https://pkg.go.dev/github.com/antihax/optional), e.g. `&api.OrderV3ApiPlaceOrderOpts{XAlgoName: optional.NewString("my-algo")}`; pass `nil` when there are none.
 Models in `models` are plain structs with exported fields; `Data` is often a pointer, so nil-check it.
 API errors are `upstox_client.GenericSwaggerError`; `Body()` holds the Upstox error code and message.
 
@@ -124,7 +124,7 @@ func main() {
 		IsAmo:             true,
 		Slice:             true,
 	}
-	resp, _, err := api.NewOrderV3Api(client).PlaceOrderV3(context.Background(), order, nil)
+	resp, _, err := api.NewOrderV3Api(client).PlaceOrder(context.Background(), order, nil)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
@@ -179,8 +179,8 @@ func main() {
 		IsAmo:             false,
 		Slice:             true,
 	}
-	opts := &api.OrderV3ApiPlaceOrderV3Opts{XAlgoName: optional.NewString("your-algo-name")}
-	resp, _, err := api.NewOrderV3Api(client).PlaceOrderV3(context.Background(), order, opts)
+	opts := &api.OrderV3ApiPlaceOrderOpts{XAlgoName: optional.NewString("your-algo-name")}
+	resp, _, err := api.NewOrderV3Api(client).PlaceOrder(context.Background(), order, opts)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
@@ -235,7 +235,7 @@ The [`examples/strategies/`](examples/strategies/) folder is organized by market
 | [Neutral](examples/strategies/neutral/) | Short Straddle, Short Strangle, Iron Butterfly, Batman, Short Iron Condor |
 | [Others](examples/strategies/others/) | Long Straddle, Long Strangle, Call Ratio Spread, Put Ratio Spread, Long Iron Butterfly, Long Iron Condor, Strip, Strap |
 
-Each strategy program selects the Nifty 50 strikes with `api.NewInstrumentsApi(client).SearchInstrument()` and places orders with `api.NewOrderV3Api(client).PlaceOrderV3()`. Set your access token and run it with `go run`; it places real orders.
+Each strategy program selects the Nifty 50 strikes with `api.NewInstrumentsApi(client).SearchInstrument()` and places orders with `api.NewOrderV3Api(client).PlaceOrder()`. Set your access token and run it with `go run`; it places real orders.
 
 ## Documentation for API Endpoints
 
@@ -244,7 +244,7 @@ Services, methods and models are listed in [docs/API_REFERENCE.md](docs/API_REFE
 | Service | Covers |
 |---|---|
 | [`OrderApi`](docs/OrderApi.md) | v2 orders, trades, multi-order, exit positions |
-| [`OrderV3Api`](docs/OrderV3Api.md) | v3 orders (`PlaceOrderV3`, `ModifyOrderV3`, `CancelOrderV3`) and GTT orders |
+| [`OrderV3Api`](docs/OrderV3Api.md) | v3 orders (`PlaceOrder`, `ModifyOrder`, `CancelOrder`) and GTT orders |
 | [`HistoryApi`](docs/HistoryApi.md) / [`HistoryV3Api`](docs/HistoryV3Api.md) | historical and intraday candles (v3 methods end in `V3`) |
 | [`UserApi`](docs/UserApi.md) | profile, funds and margin, kill switch, static IPs, payin and payout |
 | `USStocks...Api`, [`USMarketHolidaysAndTimingsApi`](docs/USMarketHolidaysAndTimingsApi.md) | US stocks orders, charges, funds, portfolio, holidays and timings |

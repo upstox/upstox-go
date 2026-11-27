@@ -35,7 +35,7 @@ paths:
     put:
       tags:
       - Order V3
-      operationId: modifyOrderV3
+      operationId: modifyOrder
       parameters:
       - name: X-Algo-Name
         in: header
@@ -586,7 +586,7 @@ paths:
     post:
       tags:
       - Order V3
-      operationId: placeOrderV3
+      operationId: placeOrder
       parameters:
       - name: X-Algo-Name
         in: header
@@ -2277,7 +2277,7 @@ paths:
       description: This API provides the functionality to retrieve the OHLC quotes
         for one or more instruments.This API returns the OHLC snapshots of up to 500
         instruments in one go.
-      operationId: getMarketQuoteOHLCV3
+      operationId: getMarketQuoteOHLC
       parameters:
       - name: instrument_key
         in: query
@@ -2428,7 +2428,7 @@ paths:
       summary: Historical candle data
       description: Get OHLC values for all instruments for the present trading day
         with expanded interval options.
-      operationId: getHistoricalCandleDataV3
+      operationId: getHistoricalCandleData
       parameters:
       - name: instrumentKey
         in: path
@@ -2524,7 +2524,7 @@ paths:
       summary: Historical candle data
       description: Get OHLC values for all instruments for the present trading day
         with expanded interval options
-      operationId: getHistoricalCandleDataRangeV3
+      operationId: getHistoricalCandleDataRange
       parameters:
       - name: instrumentKey
         in: path
@@ -2626,7 +2626,7 @@ paths:
       - History V3
       summary: Intra day candle data
       description: Get OHLC values for all instruments for the present trading day
-      operationId: getIntraDayCandleDataV3
+      operationId: getIntraDayCandleData
       parameters:
       - name: instrumentKey
         in: path
@@ -8365,7 +8365,7 @@ paths:
       summary: Expired instruments - Get expiries
       description: This API provides the functionality to retrieve expiry dates for
         a given instrument key.
-      operationId: getExpiriesResponse
+      operationId: getExpiries
       parameters:
       - name: instrument_key
         in: query
@@ -8744,7 +8744,7 @@ paths:
     delete:
       tags:
       - Order V3
-      operationId: cancelOrderV3
+      operationId: cancelOrder
       parameters:
       - name: order_id
         in: query

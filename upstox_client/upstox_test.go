@@ -38,8 +38,8 @@ func TestOrderRouting(t *testing.T) {
 	ctx := context.Background()
 
 	api.NewOrderApi(client).PlaceOrder(ctx, models.PlaceOrderRequest{}, nil)
-	api.NewOrderV3Api(client).PlaceOrderV3(ctx, models.PlaceOrderV3Request{}, nil)
-	api.NewOrderV3Api(client).CancelOrderV3(ctx, "1", nil)
+	api.NewOrderV3Api(client).PlaceOrder(ctx, models.PlaceOrderV3Request{}, nil)
+	api.NewOrderV3Api(client).CancelOrder(ctx, "1", nil)
 	api.NewUSStocksOrderApi(client).PlaceUsOrder(ctx, models.UsPlaceOrderRequest{})
 	api.NewUSStocksOrderApi(client).CancelUsOrder(ctx, "1")
 	api.NewOrderApi(client).GetOrderBook(ctx)
@@ -76,7 +76,7 @@ func TestSandbox(t *testing.T) {
 	client, rec := newTestClient(upstox_client.NewSandboxConfiguration())
 	ctx := context.Background()
 
-	api.NewOrderV3Api(client).PlaceOrderV3(ctx, models.PlaceOrderV3Request{}, nil)
+	api.NewOrderV3Api(client).PlaceOrder(ctx, models.PlaceOrderV3Request{}, nil)
 	if len(rec.reqs) != 1 || rec.reqs[0].URL.Host != "api-sandbox.upstox.com" {
 		t.Fatalf("sandbox order not sent to sandbox host: %+v", rec.reqs)
 	}
@@ -131,7 +131,7 @@ func TestUsOrderBodyIsSnakeCase(t *testing.T) {
 func TestAlgoNameHeader(t *testing.T) {
 	client, rec := newTestClient(upstox_client.NewConfiguration())
 	ctx := context.Background()
-	api.NewOrderV3Api(client).PlaceOrderV3(ctx, models.PlaceOrderV3Request{}, &api.OrderV3ApiPlaceOrderV3Opts{XAlgoName: optional.NewString("my-algo")})
+	api.NewOrderV3Api(client).PlaceOrder(ctx, models.PlaceOrderV3Request{}, &api.OrderV3ApiPlaceOrderOpts{XAlgoName: optional.NewString("my-algo")})
 	api.NewOrderApi(client).CancelOrder(ctx, "1", nil)
 
 	if got := rec.reqs[0].Header.Get("X-Algo-Name"); got != "my-algo" {
@@ -145,8 +145,8 @@ func TestAlgoNameHeader(t *testing.T) {
 func TestMarketProtectionOmittedWhenUnset(t *testing.T) {
 	client, rec := newTestClient(upstox_client.NewConfiguration())
 	ctx := context.Background()
-	api.NewOrderV3Api(client).PlaceOrderV3(ctx, models.PlaceOrderV3Request{Quantity: 1}, nil)
-	api.NewOrderV3Api(client).PlaceOrderV3(ctx, models.PlaceOrderV3Request{Quantity: 1, MarketProtection: 2.5}, nil)
+	api.NewOrderV3Api(client).PlaceOrder(ctx, models.PlaceOrderV3Request{Quantity: 1}, nil)
+	api.NewOrderV3Api(client).PlaceOrder(ctx, models.PlaceOrderV3Request{Quantity: 1, MarketProtection: 2.5}, nil)
 
 	first, _ := io.ReadAll(rec.reqs[0].Body)
 	second, _ := io.ReadAll(rec.reqs[1].Body)
@@ -160,7 +160,7 @@ func TestMarketProtectionOmittedWhenUnset(t *testing.T) {
 
 func TestPricesKeepFloat64Precision(t *testing.T) {
 	client, rec := newTestClient(upstox_client.NewConfiguration())
-	api.NewOrderV3Api(client).PlaceOrderV3(context.Background(), models.PlaceOrderV3Request{Price: 2345.65}, nil)
+	api.NewOrderV3Api(client).PlaceOrder(context.Background(), models.PlaceOrderV3Request{Price: 2345.65}, nil)
 	raw, _ := io.ReadAll(rec.reqs[0].Body)
 	if !strings.Contains(string(raw), `"price":2345.65`) {
 		t.Errorf("price lost precision: %s", raw)

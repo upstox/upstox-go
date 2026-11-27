@@ -489,13 +489,13 @@ func (r *runner) history() {
 func (r *runner) historyV3() {
 	h := api.NewHistoryV3Api(r.client)
 
-	candles, _, err := h.GetHistoricalCandleDataV3(ctx, ideaKey, "minutes", 1, "2025-01-02")
+	candles, _, err := h.GetHistoricalCandleData(ctx, ideaKey, "minutes", 1, "2025-01-02")
 	r.ok("HistoryV3Api->get_historical_candle_data", "error in get_historical_candle_data api", candles, err)
 
-	rangeCandles, _, err := h.GetHistoricalCandleDataRangeV3(ctx, ideaKey, "minutes", 1, "2025-01-02", "2025-01-02")
+	rangeCandles, _, err := h.GetHistoricalCandleDataRange(ctx, ideaKey, "minutes", 1, "2025-01-02", "2025-01-02")
 	r.ok("HistoryV3Api->get_historical_candle_data1", "error in get_historical_candle_data1 api", rangeCandles, err)
 
-	intraday, _, err := h.GetIntraDayCandleDataV3(ctx, ideaKey, "minutes", 1)
+	intraday, _, err := h.GetIntraDayCandleData(ctx, ideaKey, "minutes", 1)
 	r.ok("HistoryV3Api->get_intra_day_candle_data", "error in get_intra_day_candle_data api", intraday, err)
 }
 
@@ -503,7 +503,7 @@ func (r *runner) historyV3() {
 func (r *runner) expiredInstruments() {
 	e := api.NewExpiredInstrumentApi(r.client)
 
-	expiries, _, err := e.GetExpiriesResponse(ctx, niftyKey)
+	expiries, _, err := e.GetExpiries(ctx, niftyKey)
 	r.ok("ExpiredInstrumentApi->get_expiries", "error in get_expiries", expiries, err)
 
 	options, _, err := e.GetExpiredOptionContracts(ctx, niftyKey, "2025-04-30")
@@ -535,7 +535,7 @@ func (r *runner) marketQuote() {
 func (r *runner) marketQuoteV3() {
 	q := api.NewMarketQuoteV3Api(r.client)
 
-	ohlc, _, err := q.GetMarketQuoteOHLCV3(ctx, "I1", &api.MarketQuoteV3ApiGetMarketQuoteOHLCV3Opts{InstrumentKey: optional.NewString(ideaKey)})
+	ohlc, _, err := q.GetMarketQuoteOHLC(ctx, "I1", &api.MarketQuoteV3ApiGetMarketQuoteOHLCOpts{InstrumentKey: optional.NewString(ideaKey)})
 	r.ok("MarketQuoteV3Api->get_market_quote_ohlc", "error in get_market_quote_ohlc api", ohlc, err)
 
 	greeks, _, err := q.GetMarketQuoteOptionGreek(ctx, &api.MarketQuoteV3ApiGetMarketQuoteOptionGreekOpts{
@@ -699,14 +699,14 @@ func (r *runner) orderV3() {
 	r.ok("OrderApi->get_gtt_order_details", "get_gtt_order_details giving error", details, err)
 
 	r.section("place_order v3", func() {
-		resp, _, err := o.PlaceOrderV3(ctx, placeV3Body(), &api.OrderV3ApiPlaceOrderV3Opts{XAlgoName: algo()})
+		resp, _, err := o.PlaceOrder(ctx, placeV3Body(), &api.OrderV3ApiPlaceOrderOpts{XAlgoName: algo()})
 		r.show("place order v3 => ", resp, err, true, "Exception when calling OrderApi->place_orderV3")
 	})
 
-	_, _, err = o.ModifyOrderV3(ctx, missingV3Modify(), &api.OrderV3ApiModifyOrderV3Opts{XAlgoName: algo()})
+	_, _, err = o.ModifyOrder(ctx, missingV3Modify(), &api.OrderV3ApiModifyOrderOpts{XAlgoName: algo()})
 	r.expect("modify v3 giving error", err, "UDAPI100010")
 
-	_, _, err = o.CancelOrderV3(ctx, missingV3CancelID, &api.OrderV3ApiCancelOrderV3Opts{XAlgoName: algo()})
+	_, _, err = o.CancelOrder(ctx, missingV3CancelID, &api.OrderV3ApiCancelOrderOpts{XAlgoName: algo()})
 	r.expect("cancel v3 giving error", err, "UDAPI100010")
 }
 
@@ -801,14 +801,14 @@ func (r *runner) algoName() {
 	v3 := api.NewOrderV3Api(r.client)
 
 	r.section("place_order V3 with algo_name", func() {
-		resp, _, err := v3.PlaceOrderV3(ctx, placeV3Body(), &api.OrderV3ApiPlaceOrderV3Opts{XAlgoName: algo()})
+		resp, _, err := v3.PlaceOrder(ctx, placeV3Body(), &api.OrderV3ApiPlaceOrderOpts{XAlgoName: algo()})
 		r.show("[ok] place_order V3 with algo_name: Success - ", resp, err, false, "[ok] place_order V3 with algo_name: Exception handled")
 	})
 
-	_, _, err = v3.ModifyOrderV3(ctx, missingV3Modify(), &api.OrderV3ApiModifyOrderV3Opts{XAlgoName: algo()})
+	_, _, err = v3.ModifyOrder(ctx, missingV3Modify(), &api.OrderV3ApiModifyOrderOpts{XAlgoName: algo()})
 	r.expectAlgo("modify_order V3 with algo_name", "modify V3 with algo_name giving error", err, "UDAPI100010")
 
-	_, _, err = v3.CancelOrderV3(ctx, missingV3CancelID, &api.OrderV3ApiCancelOrderV3Opts{XAlgoName: algo()})
+	_, _, err = v3.CancelOrder(ctx, missingV3CancelID, &api.OrderV3ApiCancelOrderOpts{XAlgoName: algo()})
 	r.expectAlgo("cancel_order V3 with algo_name", "cancel V3 with algo_name giving error", err, "UDAPI100010")
 
 	fmt.Println("\n--- GTT Tests with algo_name ---")

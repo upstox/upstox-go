@@ -57,7 +57,7 @@ func TestSandboxPlaceMultiOrder(t *testing.T) {
 func TestSandboxPlaceModifyCancelOrderV3(t *testing.T) {
 	c := sandboxClient(t)
 	o := api.NewOrderV3Api(c)
-	placed, _, err := o.PlaceOrderV3(ctx(t), models.PlaceOrderV3Request{
+	placed, _, err := o.PlaceOrder(ctx(t), models.PlaceOrderV3Request{
 		Quantity: 1, Product: "D", Validity: "DAY", Price: 9.12, Tag: testTag, Slice: true,
 		InstrumentToken: ideaKey, OrderType: "LIMIT", TransactionType: "BUY",
 	}, nil)
@@ -67,12 +67,12 @@ func TestSandboxPlaceModifyCancelOrderV3(t *testing.T) {
 	}
 	id := placed.Data.OrderIds[0]
 
-	mod, _, err := o.ModifyOrderV3(ctx(t), models.ModifyOrderRequest{
+	mod, _, err := o.ModifyOrder(ctx(t), models.ModifyOrderRequest{
 		OrderId: id, Quantity: 1, Validity: "DAY", Price: 9.0, OrderType: "LIMIT",
 	}, nil)
 	check(t, mod, err)
 
-	can, _, err := o.CancelOrderV3(ctx(t), id, nil)
+	can, _, err := o.CancelOrder(ctx(t), id, nil)
 	check(t, can, err)
 }
 

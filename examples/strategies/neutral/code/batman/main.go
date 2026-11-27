@@ -85,7 +85,7 @@ func findOption(ctx context.Context, instrumentsApi *api.InstrumentsApiService, 
 
 // placeOrder places a MARKET delivery order for lots × lot size of the instrument and prints the order ids.
 func placeOrder(ctx context.Context, orderApi *api.OrderV3ApiService, leg models.InstrumentData, lots int32, transactionType, label string) {
-	resp, _, err := orderApi.PlaceOrderV3(ctx, models.PlaceOrderV3Request{
+	resp, _, err := orderApi.PlaceOrder(ctx, models.PlaceOrderV3Request{
 		InstrumentToken:   leg.InstrumentKey,
 		Quantity:          int32(leg.LotSize) * lots,
 		TransactionType:   transactionType,

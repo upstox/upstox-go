@@ -21,13 +21,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	expiredInstrumentApi := api.NewExpiredInstrumentApi(client)
 
-	resp, _, err := expiredInstrumentApi.GetExpiriesResponse(context.Background(), "NSE_INDEX|Nifty 50")
+	resp, _, err := expiredInstrumentApi.GetExpiries(context.Background(), "NSE_INDEX|Nifty 50")
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling ExpiredInstrumentApi.GetExpiriesResponse:", string(apiErr.Body()))
+			fmt.Println("Exception when calling ExpiredInstrumentApi.GetExpiries:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling ExpiredInstrumentApi.GetExpiriesResponse:", err)
+			fmt.Println("Exception when calling ExpiredInstrumentApi.GetExpiries:", err)
 		}
 		return
 	}

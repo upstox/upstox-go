@@ -26,7 +26,7 @@ Class | Method | HTTP request | Description
 *ExpiredInstrumentApi* | [**GetExpiredFutureContracts**](ExpiredInstrumentApi.md#getexpiredfuturecontracts) | **Get** /v2/expired-instruments/future/contract | Expired instruments - Get future contracts
 *ExpiredInstrumentApi* | [**GetExpiredHistoricalCandleData**](ExpiredInstrumentApi.md#getexpiredhistoricalcandledata) | **Get** /v2/expired-instruments/historical-candle/{expired_instrument_key}/{interval}/{to_date}/{from_date} | Expired Historical candle data
 *ExpiredInstrumentApi* | [**GetExpiredOptionContracts**](ExpiredInstrumentApi.md#getexpiredoptioncontracts) | **Get** /v2/expired-instruments/option/contract | Get expired option contracts
-*ExpiredInstrumentApi* | [**GetExpiriesResponse**](ExpiredInstrumentApi.md#getexpiriesresponse) | **Get** /v2/expired-instruments/expiries | Expired instruments - Get expiries
+*ExpiredInstrumentApi* | [**GetExpiries**](ExpiredInstrumentApi.md#getexpiries) | **Get** /v2/expired-instruments/expiries | Expired instruments - Get expiries
 *FundamentalsApi* | [**GetBalanceSheet**](FundamentalsApi.md#getbalancesheet) | **Get** /v2/fundamentals/{isin}/balance-sheet | Get Balance Sheet
 *FundamentalsApi* | [**GetCashFlow**](FundamentalsApi.md#getcashflow) | **Get** /v2/fundamentals/{isin}/cash-flow | Get Cash Flow
 *FundamentalsApi* | [**GetCompanyProfile**](FundamentalsApi.md#getcompanyprofile) | **Get** /v2/fundamentals/{isin}/profile | Get Company Profile
@@ -38,9 +38,9 @@ Class | Method | HTTP request | Description
 *HistoryApi* | [**GetHistoricalCandleData**](HistoryApi.md#gethistoricalcandledata) | **Get** /v2/historical-candle/{instrumentKey}/{interval}/{to_date} | Historical candle data
 *HistoryApi* | [**GetHistoricalCandleDataRange**](HistoryApi.md#gethistoricalcandledatarange) | **Get** /v2/historical-candle/{instrumentKey}/{interval}/{to_date}/{from_date} | Historical candle data
 *HistoryApi* | [**GetIntraDayCandleData**](HistoryApi.md#getintradaycandledata) | **Get** /v2/historical-candle/intraday/{instrumentKey}/{interval} | Intra day candle data
-*HistoryV3Api* | [**GetHistoricalCandleDataRangeV3**](HistoryV3Api.md#gethistoricalcandledatarangev3) | **Get** /v3/historical-candle/{instrumentKey}/{unit}/{interval}/{to_date}/{from_date} | Historical candle data
-*HistoryV3Api* | [**GetHistoricalCandleDataV3**](HistoryV3Api.md#gethistoricalcandledatav3) | **Get** /v3/historical-candle/{instrumentKey}/{unit}/{interval}/{to_date} | Historical candle data
-*HistoryV3Api* | [**GetIntraDayCandleDataV3**](HistoryV3Api.md#getintradaycandledatav3) | **Get** /v3/historical-candle/intraday/{instrumentKey}/{unit}/{interval} | Intra day candle data
+*HistoryV3Api* | [**GetHistoricalCandleData**](HistoryV3Api.md#gethistoricalcandledata) | **Get** /v3/historical-candle/{instrumentKey}/{unit}/{interval}/{to_date} | Historical candle data
+*HistoryV3Api* | [**GetHistoricalCandleDataRange**](HistoryV3Api.md#gethistoricalcandledatarange) | **Get** /v3/historical-candle/{instrumentKey}/{unit}/{interval}/{to_date}/{from_date} | Historical candle data
+*HistoryV3Api* | [**GetIntraDayCandleData**](HistoryV3Api.md#getintradaycandledata) | **Get** /v3/historical-candle/intraday/{instrumentKey}/{unit}/{interval} | Intra day candle data
 *IPOApi* | [**ApplyForIpo**](IPOApi.md#applyforipo) | **Post** /v2/ipos/orders | Apply for IPO
 *IPOApi* | [**CancelIpoOrder**](IPOApi.md#cancelipoorder) | **Delete** /v2/ipos/orders/{order_id} | Cancel IPO Order
 *IPOApi* | [**GetIpoDetails**](IPOApi.md#getipodetails) | **Get** /v2/ipos/{id} | Get IPO Details
@@ -71,7 +71,7 @@ Class | Method | HTTP request | Description
 *MarketQuoteApi* | [**Ltp**](MarketQuoteApi.md#ltp) | **Get** /v2/market-quote/ltp | Market quotes and instruments - LTP quotes.
 *MarketQuoteV3Api* | [**GetFullMarketQuoteV3**](MarketQuoteV3Api.md#getfullmarketquotev3) | **Get** /v3/market-quote/quotes | Market quotes and instruments - Full market quotes
 *MarketQuoteV3Api* | [**GetLtp**](MarketQuoteV3Api.md#getltp) | **Get** /v3/market-quote/ltp | Market quotes and instruments - LTP quotes.
-*MarketQuoteV3Api* | [**GetMarketQuoteOHLCV3**](MarketQuoteV3Api.md#getmarketquoteohlcv3) | **Get** /v3/market-quote/ohlc | Market quotes and instruments - OHLC quotes
+*MarketQuoteV3Api* | [**GetMarketQuoteOHLC**](MarketQuoteV3Api.md#getmarketquoteohlc) | **Get** /v3/market-quote/ohlc | Market quotes and instruments - OHLC quotes
 *MarketQuoteV3Api* | [**GetMarketQuoteOptionGreek**](MarketQuoteV3Api.md#getmarketquoteoptiongreek) | **Get** /v3/market-quote/option-greek | Market quotes and instruments - Option Greek
 *MutualFundApi* | [**GetMutualFundHoldings**](MutualFundApi.md#getmutualfundholdings) | **Get** /v2/mf/holdings | Get mutual fund holdings
 *MutualFundApi* | [**GetMutualFundOrder**](MutualFundApi.md#getmutualfundorder) | **Get** /v2/mf/orders/{order_id} | Get mutual fund order by id
@@ -92,12 +92,12 @@ Class | Method | HTTP request | Description
 *OrderApi* | [**PlaceMultiOrder**](OrderApi.md#placemultiorder) | **Post** /v2/order/multi/place | Place multi order
 *OrderApi* | [**PlaceOrder**](OrderApi.md#placeorder) | **Post** /v2/order/place | Place order
 *OrderV3Api* | [**CancelGTTOrder**](OrderV3Api.md#cancelgttorder) | **Delete** /v3/order/gtt/cancel | Cancel GTT order
-*OrderV3Api* | [**CancelOrderV3**](OrderV3Api.md#cancelorderv3) | **Delete** /v3/order/cancel | 
+*OrderV3Api* | [**CancelOrder**](OrderV3Api.md#cancelorder) | **Delete** /v3/order/cancel | 
 *OrderV3Api* | [**GetGttOrderDetails**](OrderV3Api.md#getgttorderdetails) | **Get** /v3/order/gtt | Get GTT order details
 *OrderV3Api* | [**ModifyGTTOrder**](OrderV3Api.md#modifygttorder) | **Put** /v3/order/gtt/modify | Modify GTT order
-*OrderV3Api* | [**ModifyOrderV3**](OrderV3Api.md#modifyorderv3) | **Put** /v3/order/modify | 
+*OrderV3Api* | [**ModifyOrder**](OrderV3Api.md#modifyorder) | **Put** /v3/order/modify | 
 *OrderV3Api* | [**PlaceGTTOrder**](OrderV3Api.md#placegttorder) | **Post** /v3/order/gtt/place | Place GTT order
-*OrderV3Api* | [**PlaceOrderV3**](OrderV3Api.md#placeorderv3) | **Post** /v3/order/place | 
+*OrderV3Api* | [**PlaceOrder**](OrderV3Api.md#placeorder) | **Post** /v3/order/place | 
 *PortfolioApi* | [**ConvertPositions**](PortfolioApi.md#convertpositions) | **Put** /v2/portfolio/convert-position | Convert Positions
 *PortfolioApi* | [**GetHoldings**](PortfolioApi.md#getholdings) | **Get** /v2/portfolio/long-term-holdings | Get Holdings
 *PortfolioApi* | [**GetMtfPositions**](PortfolioApi.md#getmtfpositions) | **Get** /v3/portfolio/mtf-positions | Get MTF positions

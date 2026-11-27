@@ -37,7 +37,7 @@ func TestGetFullMarketQuoteV3(t *testing.T) {
 
 func TestGetMarketQuoteOHLCV3(t *testing.T) {
 	c := client(t)
-	resp, _, err := api.NewMarketQuoteV3Api(c).GetMarketQuoteOHLCV3(ctx(t), "1d", &api.MarketQuoteV3ApiGetMarketQuoteOHLCV3Opts{
+	resp, _, err := api.NewMarketQuoteV3Api(c).GetMarketQuoteOHLC(ctx(t), "1d", &api.MarketQuoteV3ApiGetMarketQuoteOHLCOpts{
 		InstrumentKey: optional.NewString(ideaKey),
 	})
 	check(t, resp, err)
@@ -45,7 +45,7 @@ func TestGetMarketQuoteOHLCV3(t *testing.T) {
 
 func TestGetMarketQuoteOHLCV3Intraday(t *testing.T) {
 	c := client(t)
-	resp, _, err := api.NewMarketQuoteV3Api(c).GetMarketQuoteOHLCV3(ctx(t), "I1", &api.MarketQuoteV3ApiGetMarketQuoteOHLCV3Opts{
+	resp, _, err := api.NewMarketQuoteV3Api(c).GetMarketQuoteOHLC(ctx(t), "I1", &api.MarketQuoteV3ApiGetMarketQuoteOHLCOpts{
 		InstrumentKey: optional.NewString(ideaKey),
 	})
 	check(t, resp, err)

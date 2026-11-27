@@ -20,13 +20,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetIntraDayCandleDataV3(context.Background(), "NSE_EQ|INE848E01016", "minutes", 1)
+	resp, _, err := historyV3Api.GetIntraDayCandleData(context.Background(), "NSE_EQ|INE848E01016", "minutes", 1)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", err)
 		}
 		return
 	}
@@ -61,13 +61,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetIntraDayCandleDataV3(context.Background(), "NSE_EQ|INE848E01016", "minutes", 3)
+	resp, _, err := historyV3Api.GetIntraDayCandleData(context.Background(), "NSE_EQ|INE848E01016", "minutes", 3)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", err)
 		}
 		return
 	}
@@ -102,13 +102,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetIntraDayCandleDataV3(context.Background(), "NSE_EQ|INE848E01016", "minutes", 5)
+	resp, _, err := historyV3Api.GetIntraDayCandleData(context.Background(), "NSE_EQ|INE848E01016", "minutes", 5)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", err)
 		}
 		return
 	}
@@ -143,13 +143,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetIntraDayCandleDataV3(context.Background(), "NSE_EQ|INE848E01016", "minutes", 15)
+	resp, _, err := historyV3Api.GetIntraDayCandleData(context.Background(), "NSE_EQ|INE848E01016", "minutes", 15)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", err)
 		}
 		return
 	}
@@ -184,13 +184,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetIntraDayCandleDataV3(context.Background(), "NSE_EQ|INE848E01016", "minutes", 30)
+	resp, _, err := historyV3Api.GetIntraDayCandleData(context.Background(), "NSE_EQ|INE848E01016", "minutes", 30)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", err)
 		}
 		return
 	}
@@ -225,13 +225,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetIntraDayCandleDataV3(context.Background(), "NSE_EQ|INE848E01016", "hours", 1)
+	resp, _, err := historyV3Api.GetIntraDayCandleData(context.Background(), "NSE_EQ|INE848E01016", "hours", 1)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", err)
 		}
 		return
 	}
@@ -266,13 +266,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetIntraDayCandleDataV3(context.Background(), "NSE_EQ|INE848E01016", "hours", 2)
+	resp, _, err := historyV3Api.GetIntraDayCandleData(context.Background(), "NSE_EQ|INE848E01016", "hours", 2)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", err)
 		}
 		return
 	}
@@ -307,13 +307,13 @@ func main() {
 	client := upstox_client.NewAPIClient(cfg)
 	historyV3Api := api.NewHistoryV3Api(client)
 
-	resp, _, err := historyV3Api.GetIntraDayCandleDataV3(context.Background(), "NSE_EQ|INE848E01016", "days", 1)
+	resp, _, err := historyV3Api.GetIntraDayCandleData(context.Background(), "NSE_EQ|INE848E01016", "days", 1)
 	if err != nil {
 		var apiErr upstox_client.GenericSwaggerError
 		if errors.As(err, &apiErr) {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", string(apiErr.Body()))
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", string(apiErr.Body()))
 		} else {
-			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleDataV3:", err)
+			fmt.Println("Exception when calling HistoryV3Api.GetIntraDayCandleData:", err)
 		}
 		return
 	}
